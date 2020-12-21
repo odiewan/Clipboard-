@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="favoriteCollection" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Pa$$wordPa$$word123&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="addressCollection" Type="System.Net.Mail.MailAddressCollection" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="recentCollection" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;DMCI-isf\william.o'dell.adm&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="defAddress00" Type="System.String" Scope="User">
+      <Value Profile="(Default)">odie@odiesystems.com</Value>
+    </Setting>
+    <Setting Name="defName00" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Odie</Value>
+    </Setting>
+    <Setting Name="defAddress01" Type="System.String" Scope="User">
+      <Value Profile="(Default)">suzypeterson@mac.com</Value>
+    </Setting>
+    <Setting Name="defName01" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Suzy</Value>
+    </Setting>
+    <Setting Name="fav01" Type="System.String" Scope="User">
+      <Value Profile="(Default)">""</Value>
+    </Setting>
+    <Setting Name="fav00" Type="System.String" Scope="User">
+      <Value Profile="(Default)">""</Value>
+    </Setting>
+    <Setting Name="fav02" Type="System.String" Scope="User">
+      <Value Profile="(Default)">"'</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
