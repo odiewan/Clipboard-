@@ -169,6 +169,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Paste.ico" />
+    <Content Include="Resources\Delete.png" />
+    <None Include="Resources\Delete1.png" />
+    <None Include="Resources\Clipboard_clear.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -1,6 +1,7 @@
 ﻿Imports System.Collections.Specialized
 Imports System.Net.Mail
 Imports System.Net.Mail.MailAddress
+Imports Microsoft.VisualBasic.CompilerServices
 
 Public Class Form1
 
@@ -10,6 +11,9 @@ Public Class Form1
   Private iCount As Integer
   Private copyCount As Integer
   Private unkCount As Integer
+
+  Private locMaxBufferItemSize As Integer
+  Private locMaxBufferTotalSize As Long
 
   Private coUnique As Collection
   Private currentCB As String
@@ -144,6 +148,8 @@ Public Class Form1
     Dim tmpAddy00 As New MailAddress(My.Settings.defAddress00, My.Settings.defName00)
     Dim tmpAddy01 As New MailAddress(My.Settings.defAddress01, My.Settings.defName01)
 
+    locMaxBufferItemSize = My.Settings.maxBufferItemSize
+    locMaxBufferTotalSize = My.Settings.maxBufferTotalSize
 
     '---Init address Collection
     If My.Settings.addressCollection Is Nothing Then
@@ -175,22 +181,28 @@ Public Class Form1
 
   '----------------------------------------------------------------------------
   Private Sub loadSettingCollection(ByRef srcColl As StringCollection, ByRef destColl As StringCollection)
-
+    Dim tempSize As Integer
     If srcColl Is Nothing Then
       addMsg("Source Collection Is Empty")
 
     Else
       addMsg("Assign RT recents")
       '----Insert the current buffer with duplicates filtered out
+      tspbProg.Maximum = srcColl.Count
+      tspbProg.Value = 0
       For Each r In srcColl
+        tempSize = r.Length()
+        addMsg("Size:" & tempSize)
         If destColl.Contains(r) Then
           addMsg("Skipping duplicate")
+        ElseIf tempSize > locMaxBufferItemSize Then
+          addMsg("Skipping item: Exceeds max (" & locMaxBufferItemSize & "b) item size")
         Else
           addMsg("Adding recent")
           destColl.Add(r)
         End If
+        tspbProg.Value += 1
       Next
-
 
     End If
   End Sub
@@ -230,7 +242,7 @@ Public Class Form1
   '----------------------------------------------------------------------------
   Private Sub updateGui()
 
-    tsslCmd.Text = Strings.Left(currentCB, 64)
+    'tsslCmd.Text = Strings.Left(currentCB, 64)
 
     lblCBContents.Text = Strings.Left(currentCB, 64)
 
@@ -239,6 +251,8 @@ Public Class Form1
     tsslCopyCount.Text = "Copy Count:" & copyCount
     tsslCOCout.Text = "CO Count:" & coUnique.Count
     tsslCount.Text = iCount
+    tbxMaxItemSize.Text = locMaxBufferItemSize
+    tbxMaxTotalBufferSize.Text = locMaxBufferTotalSize
 
     lbxClipboardBuffer.DataSource = Nothing
     lbxFavorites.DataSource = Nothing
@@ -247,7 +261,7 @@ Public Class Form1
     lbxFavorites.DataSource = sFavoriteCollection
     lbxClipboardBuffer.SelectedIndex = lbxClipboardBuffer.Items.Count - 1
 
-    gbxFavorites.Text = "Favorites - " & lbxFavorites.Items.Count
+    'gbxFavorites.Text = "Favorites - " & lbxFavorites.Items.Count
     tbpBufferRaw.Text = "Buffer - " & lbxClipboardBuffer.Items.Count
 
     If lbxClipboardBuffer.Items.Count < 1 Then
@@ -294,7 +308,7 @@ Public Class Form1
 
   End Sub
 
-
+  '----------------------------------------------------------------------------
   Private Function isDupInColl(ByRef sColl As StringCollection)
     Dim cbDupCnt As Integer = 0
 
