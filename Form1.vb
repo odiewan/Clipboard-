@@ -244,7 +244,7 @@ Public Class Form1
 
     'tsslCmd.Text = Strings.Left(currentCB, 64)
 
-    lblCBContents.Text = Strings.Left(currentCB, 64)
+    tstbClipboard.Text = Strings.Left(currentCB, 64)
 
 
 
@@ -259,11 +259,12 @@ Public Class Form1
 
     lbxClipboardBuffer.DataSource = sRecentCollection
     lbxFavorites.DataSource = sFavoriteCollection
-    lbxClipboardBuffer.SelectedIndex = lbxClipboardBuffer.Items.Count - 1
+    'lbxClipboardBuffer.SelectedIndex = lbxClipboardBuffer.Items.Count - 1
 
     'gbxFavorites.Text = "Favorites - " & lbxFavorites.Items.Count
     tbpBufferRaw.Text = "Buffer - " & lbxClipboardBuffer.Items.Count
 
+    '---Toolstrip menu item enable handling---
     If lbxClipboardBuffer.Items.Count < 1 Then
       tsmiCopyToFav.Enabled = False
       tsmiRemoveBuff.Enabled = False
@@ -291,6 +292,7 @@ Public Class Form1
       tsmiMoveDown.Enabled = True
     End If
 
+    '---Links tab button enabling---
     If lbxLinks.Items.Count > 0 Then
       btnFwdLink.Enabled = True
       cbxEmailTo.Enabled = True
@@ -354,13 +356,9 @@ Public Class Form1
 
 
       addMsg("New CB content")
-
       currentCB = cbContent
-
-
       pushBufferList()
       pushUniqueList()
-
 
       copyCount += 1
 
@@ -432,15 +430,6 @@ Public Class Form1
   End Sub
 
 
-  '----------------------------------------------------------------------------
-  Private Sub btnClearBuffer_Click(sender As Object, e As EventArgs) Handles btnClearBuffer.Click
-    addMsg("s")
-    lbxClipboardBuffer.Items.Clear()
-    lbxLinks.Items.Clear()
-    lblCBContents.Text = "Clear Buffer"
-    addMsg("d")
-  End Sub
-
 
   '----------------------------------------------------------------------------
   Private Sub assignCB()
@@ -451,7 +440,6 @@ Public Class Form1
     End If
   End Sub
 
-
   '----------------------------------------------------------------------------
   Private Sub setCBData(ByRef sColl As StringCollection, ByVal idx As Integer)
     addMsg("s")
@@ -459,57 +447,33 @@ Public Class Form1
     addMsg("Get clipboard buffer item data")
     currentCB = sColl.Item(idx)
     assignCB()
-    If currentCB <> "" Then
-      addMsg("Copy clipboard buffer item to inspect tab")
-      tbxInspect.Text = currentCB
-
-    End If
     updateGui()
     sCBLock = False
     addMsg("d")
   End Sub
 
-
   '----------------------------------------------------------------------------
-  Private Sub lbxClipboardBuffer_DoubleClick(sender As Object, e As EventArgs) Handles lbxClipboardBuffer.DoubleClick
-    addMsg("lbxClipboardBuffer.DoubleClick")
-    setCBData(sRecentCollection, sender.SelectedIndex)
-  End Sub
-
-
-  Private Sub lbxUniqueBuffer_DoubleClick(sender As Object, e As EventArgs) Handles lbxUniqueBuffer.DoubleClick
-    addMsg("lbxUniqueBuffer.DoubleClick")
-    setCBData(sRankedCollection, sender.SelectedIndex)
-  End Sub
-
-
-  Private Sub lbxFavorites_DoubleClick(sender As Object, e As EventArgs) Handles lbxFavorites.DoubleClick
-    addMsg("lbxFavorites.DoubleClick")
-    setCBData(sFavoriteCollection, sender.SelectedIndex)
-  End Sub
-
-
-  '----------------------------------------------------------------------------
-  Private Sub btnClearClipboard_Click(sender As Object, e As EventArgs) Handles btnClearClipboard.Click
+  Private Sub clearClipboard()
     addMsg("Clear Clipboard")
     My.Computer.Clipboard.Clear()
-    lblCBContents.Text = "<empty>"
-    lbxUniqueBuffer.Text = "<empty>"
-    lbxLinks.Text = "<empty>"
+    tstbClipboard.Text = "<empty>"
     tsslCmd.Text = "Clear Clipboard"
     addMsg("d")
   End Sub
 
 
   '----------------------------------------------------------------------------
-  Private Sub lbxClipboardBuffer_MouseHover(sender As Object, e As EventArgs)
-    ToolTip1.SetToolTip(lblCBContents, currentCB)
+  Private Sub clearBuffer()
+    addMsg("Clear Buffer")
+    clearClipboard()
+    lbxLinks.Text = "<empty>"
+    tsslCmd.Text = "Clear Buffer"
+    addMsg("d")
   End Sub
 
-
   '----------------------------------------------------------------------------
-  Private Sub lblCBContents_MouseHover(sender As Object, e As EventArgs) Handles lblCBContents.MouseHover
-    ToolTip1.SetToolTip(lbxClipboardBuffer, currentCB)
+  Private Sub clearFavorites()
+
   End Sub
 
 
@@ -557,15 +521,6 @@ Public Class Form1
 
 
   '----------------------------------------------------------------------------
-  Private Sub btnFwdLink_Click(sender As Object, e As EventArgs) Handles btnFwdLink.Click
-
-
-    'createMail("This is a test", "Subj: Test")
-
-    createMail(lbxLinks.Items(0).ToString, "Send a link")
-  End Sub
-
-  '----------------------------------------------------------------------------
   Private Sub sendCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
     Dim tmpStr As String
     If e.Cancelled Then
@@ -582,6 +537,46 @@ Public Class Form1
       MsgBox(tmpStr, vbOKOnly, "Mail Status")
     End If
   End Sub
+
+  '----------------------------------------------------------------------------
+  Private Sub lbxClipboardBuffer_DoubleClick(sender As Object, e As EventArgs) Handles lbxClipboardBuffer.DoubleClick
+    addMsg("lbxClipboardBuffer.DoubleClick")
+    setCBData(sRecentCollection, sender.SelectedIndex)
+  End Sub
+
+
+  Private Sub lbxUniqueBuffer_DoubleClick(sender As Object, e As EventArgs)
+    addMsg("lbxUniqueBuffer.DoubleClick")
+    setCBData(sRankedCollection, sender.SelectedIndex)
+  End Sub
+
+
+
+  Private Sub lbxFavorites_DoubleClick(sender As Object, e As EventArgs) Handles lbxFavorites.DoubleClick
+    addMsg("lbxFavorites.DoubleClick")
+    setCBData(sFavoriteCollection, sender.SelectedIndex)
+  End Sub
+
+
+  '----------------------------------------------------------------------------
+  Private Sub lbxClipboardBuffer_MouseHover(sender As Object, e As EventArgs)
+    ToolTip1.SetToolTip(lbxClipboardBuffer, currentCB)
+  End Sub
+
+
+  '----------------------------------------------------------------------------
+  Private Sub tstbClipboard_MouseHover(sender As Object, e As EventArgs) Handles tstbClipboard.MouseHover
+    'ToolTip1.SetToolTip(tstbClipboard, currentCB)
+    tstbClipboard.ToolTipText = currentCB
+  End Sub
+
+  '----------------------------------------------------------------------------
+  Private Sub btnFwdLink_Click(sender As Object, e As EventArgs) Handles btnFwdLink.Click
+    'createMail("This is a test", "Subj: Test")
+    createMail(lbxLinks.Items(0).ToString, "Send a link")
+  End Sub
+
+
 
   Private Sub cbxEmailTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxEmailTo.SelectedIndexChanged
     sLinkRecipient = cbxEmailTo.Items(cbxEmailTo.SelectedIndex)
@@ -720,5 +715,17 @@ Public Class Form1
       sRecentCollection.RemoveAt(idx)
       updateGui()
     End If
+  End Sub
+
+  Private Sub tsbtClearBuffer_Click(sender As Object, e As EventArgs) Handles tsbtClearBuffer.Click
+    clearBuffer()
+  End Sub
+
+  Private Sub tsbtClearCB_Click(sender As Object, e As EventArgs) Handles tsbtClearCB.Click
+    clearClipboard()
+  End Sub
+
+  Private Sub btnClearClipboard_Click(sender As Object, e As EventArgs)
+
   End Sub
 End Class
