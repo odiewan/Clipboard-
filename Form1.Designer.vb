@@ -234,14 +234,11 @@ Partial Class Form1
         Me.tsmiRemoveFav.Name = "tsmiRemoveFav"
         Me.tsmiRemoveFav.Size = New System.Drawing.Size(196, 22)
         Me.tsmiRemoveFav.Text = "Remove from Favorites"
-        '
-        'Form1BindingSource
-        '
-        Me.Form1BindingSource.DataSource = GetType(Clipboard_Test_Prj.Form1)
-        '
-        'tbpBufferRaw
-        '
-        Me.tbpBufferRaw.Controls.Add(Me.lbxClipboardBuffer)
+
+    '
+    'tbpBufferRaw
+    '
+    Me.tbpBufferRaw.Controls.Add(Me.lbxClipboardBuffer)
         Me.tbpBufferRaw.Location = New System.Drawing.Point(4, 22)
         Me.tbpBufferRaw.Margin = New System.Windows.Forms.Padding(2)
         Me.tbpBufferRaw.Name = "tbpBufferRaw"
