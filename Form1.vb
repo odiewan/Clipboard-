@@ -539,7 +539,7 @@ Public Class Form1
   End Sub
 
   '----------------------------------------------------------------------------
-  Private Sub lbxClipboardBuffer_DoubleClick(sender As Object, e As EventArgs) Handles lbxClipboardBuffer.DoubleClick
+  Private Sub lbxClipboardBuffer_DoubleClick(sender As Object, e As EventArgs)
     addMsg("lbxClipboardBuffer.DoubleClick")
     setCBData(sRecentCollection, sender.SelectedIndex)
   End Sub
@@ -552,7 +552,7 @@ Public Class Form1
 
 
 
-  Private Sub lbxFavorites_DoubleClick(sender As Object, e As EventArgs) Handles lbxFavorites.DoubleClick
+  Private Sub lbxFavorites_DoubleClick(sender As Object, e As EventArgs)
     addMsg("lbxFavorites.DoubleClick")
     setCBData(sFavoriteCollection, sender.SelectedIndex)
   End Sub
@@ -565,20 +565,20 @@ Public Class Form1
 
 
   '----------------------------------------------------------------------------
-  Private Sub tstbClipboard_MouseHover(sender As Object, e As EventArgs) Handles tstbClipboard.MouseHover
+  Private Sub tstbClipboard_MouseHover(sender As Object, e As EventArgs)
     'ToolTip1.SetToolTip(tstbClipboard, currentCB)
     tstbClipboard.ToolTipText = currentCB
   End Sub
 
   '----------------------------------------------------------------------------
-  Private Sub btnFwdLink_Click(sender As Object, e As EventArgs) Handles btnFwdLink.Click
+  Private Sub btnFwdLink_Click(sender As Object, e As EventArgs)
     'createMail("This is a test", "Subj: Test")
     createMail(lbxLinks.Items(0).ToString, "Send a link")
   End Sub
 
 
 
-  Private Sub cbxEmailTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxEmailTo.SelectedIndexChanged
+  Private Sub cbxEmailTo_SelectedIndexChanged(sender As Object, e As EventArgs)
     sLinkRecipient = cbxEmailTo.Items(cbxEmailTo.SelectedIndex)
     addMsg("Fwd recipient email set to " & sLinkRecipient)
 
@@ -717,15 +717,19 @@ Public Class Form1
     End If
   End Sub
 
-  Private Sub tsbtClearBuffer_Click(sender As Object, e As EventArgs) Handles tsbtClearBuffer.Click
+  Private Sub tsbtClearBuffer_Click(sender As Object, e As EventArgs)
     clearBuffer()
   End Sub
 
-  Private Sub tsbtClearCB_Click(sender As Object, e As EventArgs) Handles tsbtClearCB.Click
+  Private Sub tsbtClearCB_Click(sender As Object, e As EventArgs)
     clearClipboard()
   End Sub
 
   Private Sub btnClearClipboard_Click(sender As Object, e As EventArgs)
+
+  End Sub
+
+  Private Sub tstbClipboard_Click(sender As Object, e As EventArgs)
 
   End Sub
 End Class

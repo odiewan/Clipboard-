@@ -44,5 +44,17 @@
     <Setting Name="maxBufferTotalSize" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">4000000000</Value>
     </Setting>
+    <Setting Name="soundFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="systemSoundFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Windows\Media</Value>
+    </Setting>
+    <Setting Name="alertSoundFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Windows.Media\Windows Battery Critical.wav</Value>
+    </Setting>
+    <Setting Name="enableAlertSounds" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -200,6 +200,54 @@ Namespace My
                 Me("maxBufferTotalSize") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property soundFolder() As String
+            Get
+                Return CType(Me("soundFolder"),String)
+            End Get
+            Set
+                Me("soundFolder") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Windows\Media")>  _
+        Public Property systemSoundFolder() As String
+            Get
+                Return CType(Me("systemSoundFolder"),String)
+            End Get
+            Set
+                Me("systemSoundFolder") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Windows.Media\Windows Battery Critical.wav")>  _
+        Public Property alertSoundFile() As String
+            Get
+                Return CType(Me("alertSoundFile"),String)
+            End Get
+            Set
+                Me("alertSoundFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property enableAlertSounds() As Boolean
+            Get
+                Return CType(Me("enableAlertSounds"),Boolean)
+            End Get
+            Set
+                Me("enableAlertSounds") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
