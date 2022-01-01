@@ -203,7 +203,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Users\Odie\Documents\Media")>  _
         Public Property soundFolder() As String
             Get
                 Return CType(Me("soundFolder"),String)
@@ -215,37 +215,37 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("C:\Windows\Media")>  _
-        Public Property systemSoundFolder() As String
+         Global.System.Configuration.DefaultSettingValueAttribute(""&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"chord.wav")>  _
+        Public Property copyAlertSoundFile() As String
             Get
-                Return CType(Me("systemSoundFolder"),String)
+                Return CType(Me("copyAlertSoundFile"),String)
             End Get
             Set
-                Me("systemSoundFolder") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("C:\Windows.Media\Windows Battery Critical.wav")>  _
-        Public Property alertSoundFile() As String
-            Get
-                Return CType(Me("alertSoundFile"),String)
-            End Get
-            Set
-                Me("alertSoundFile") = value
+                Me("copyAlertSoundFile") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property enableAlertSounds() As Boolean
+        Public Property enableAlertSound() As Boolean
             Get
-                Return CType(Me("enableAlertSounds"),Boolean)
+                Return CType(Me("enableAlertSound"),Boolean)
             End Get
             Set
-                Me("enableAlertSounds") = value
+                Me("enableAlertSound") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("C:\Windows\Media")>  _
+        Public Property defaultSoundFolder() As String
+            Get
+                Return CType(Me("defaultSoundFolder"),String)
+            End Get
+            Set
+                Me("defaultSoundFolder") = value
             End Set
         End Property
     End Class

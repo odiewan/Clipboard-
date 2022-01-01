@@ -45,16 +45,17 @@
       <Value Profile="(Default)">4000000000</Value>
     </Setting>
     <Setting Name="soundFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">C:\Users\Odie\Documents\Media</Value>
     </Setting>
-    <Setting Name="systemSoundFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Windows\Media</Value>
+    <Setting Name="copyAlertSoundFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">
+chord.wav</Value>
     </Setting>
-    <Setting Name="alertSoundFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Windows.Media\Windows Battery Critical.wav</Value>
-    </Setting>
-    <Setting Name="enableAlertSounds" Type="System.Boolean" Scope="User">
+    <Setting Name="enableAlertSound" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="defaultSoundFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Windows\Media</Value>
     </Setting>
   </Settings>
 </SettingsFile>

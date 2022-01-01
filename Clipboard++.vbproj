@@ -74,6 +74,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -123,6 +124,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Settings.vb" />
     <Compile Include="util_logging.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +172,8 @@
   <ItemGroup>
     <Content Include="Paste.ico" />
     <Content Include="Resources\Delete.png" />
+    <Content Include="Resources\Folder_action_open.ico" />
+    <None Include="Resources\Folder_action_open.png" />
     <None Include="Resources\Delete1.png" />
     <None Include="Resources\Clipboard_clear.png" />
   </ItemGroup>

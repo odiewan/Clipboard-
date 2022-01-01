@@ -12,9 +12,6 @@ Public Class Form1
   Private copyCount As Integer
   Private unkCount As Integer
 
-  Private locMaxBufferItemSize As Integer
-  Private locMaxBufferTotalSize As Long
-
   Private coUnique As Collection
   Private currentCB As String
 
@@ -132,8 +129,12 @@ Public Class Form1
 
     Timer1.Enabled = sTmrEnable
 
+
+
     loadSettings()
     updateGui()
+    tbxMaxTotalBufferSize.DataBindings.Add(New System.Windows.Forms.Binding("Text", My.Settings, "maxBufferTotalSize"))
+    tbxMaxItemSize.DataBindings.Add(New System.Windows.Forms.Binding("Text", My.Settings, "maxBufferItemSize"))
 
     addMsg("d")
   End Sub
@@ -148,8 +149,7 @@ Public Class Form1
     Dim tmpAddy00 As New MailAddress(My.Settings.defAddress00, My.Settings.defName00)
     Dim tmpAddy01 As New MailAddress(My.Settings.defAddress01, My.Settings.defName01)
 
-    locMaxBufferItemSize = My.Settings.maxBufferItemSize
-    locMaxBufferTotalSize = My.Settings.maxBufferTotalSize
+
 
     '---Init address Collection
     If My.Settings.addressCollection Is Nothing Then
@@ -195,8 +195,8 @@ Public Class Form1
         addMsg("Size:" & tempSize)
         If destColl.Contains(r) Then
           addMsg("Skipping duplicate")
-        ElseIf tempSize > locMaxBufferItemSize Then
-          addMsg("Skipping item: Exceeds max (" & locMaxBufferItemSize & "b) item size")
+        ElseIf tempSize > My.Settings.maxBufferItemSize Then
+          addMsg("Skipping item: Exceeds max (" & My.Settings.maxBufferItemSize & "b) item size")
         Else
           addMsg("Adding recent")
           destColl.Add(r)
@@ -233,7 +233,7 @@ Public Class Form1
 
     My.Settings.recentCollection = filterCollection(sRecentCollection)
     My.Settings.favoriteCollection = filterCollection(sFavoriteCollection)
-    'My.Settings.addressCollection = sAddressCollection
+
 
     addMsg("Setting updated")
   End Sub
@@ -251,8 +251,8 @@ Public Class Form1
     tsslCopyCount.Text = "Copy Count:" & copyCount
     tsslCOCout.Text = "CO Count:" & coUnique.Count
     tsslCount.Text = iCount
-    tbxMaxItemSize.Text = locMaxBufferItemSize
-    tbxMaxTotalBufferSize.Text = locMaxBufferTotalSize
+    tbxMaxItemSize.Text = My.Settings.maxBufferItemSize
+    tbxMaxTotalBufferSize.Text = My.Settings.maxBufferTotalSize
 
     lbxClipboardBuffer.DataSource = Nothing
     lbxFavorites.DataSource = Nothing
@@ -342,16 +342,29 @@ Public Class Form1
 
   End Sub
 
+  Private Function playSound(fullPath As String) As Boolean
+
+    If System.IO.File.Exists(fullPath) Then
+      My.Computer.Audio.Play(fullPath)
+      Return True
+    Else
+      Console.WriteLine("Error: Invalid file path")
+      'MsgBox("Errorr: Invalid file path", vbOKOnly, "File Error!")
+      Return False
+    End If
+  End Function
+
+
 
   '----------------------------------------------------------------------------
   Private Function procNewCBData() As Integer
-
     If cbContent <> "" Then
       'addMsg("Not empty")
-      If System.IO.File.Exists("C:\Users\Odie\Music\Sounds\Camera Shutter Click.wav") Then
-        My.Computer.Audio.Play("C:\Users\Odie\Music\Sounds\Camera Shutter Click.wav")
-      Else
-        My.Computer.Audio.PlaySystemSound(System.Media.SystemSounds.Asterisk)
+      If My.Settings.enableAlertSound Then
+        If playSound(My.Settings.copyAlertSoundFile) Then
+        Else
+          My.Computer.Audio.PlaySystemSound(System.Media.SystemSounds.Asterisk)
+        End If
       End If
 
 
@@ -432,25 +445,41 @@ Public Class Form1
 
 
   '----------------------------------------------------------------------------
-  Private Sub assignCB()
-    If currentCB <> "" Then
+  Private Sub assignCB(nText As String)
+    If nText <> "" Then
       addMsg("Assign the CB to the dbl clicked item data")
-      My.Computer.Clipboard.SetText(currentCB)
+      My.Computer.Clipboard.SetText(nText)
 
     End If
   End Sub
 
   '----------------------------------------------------------------------------
-  Private Sub setCBData(ByRef sColl As StringCollection, ByVal idx As Integer)
+  Private Sub setCBData(nText)
     addMsg("s")
     sCBLock = True
-    addMsg("Get clipboard buffer item data")
-    currentCB = sColl.Item(idx)
-    assignCB()
+    addMsg("Set the current CB to " & nText)
+    currentCB = nText
+    assignCB(currentCB)
     updateGui()
     sCBLock = False
     addMsg("d")
   End Sub
+
+
+  '----------------------------------------------------------------------------
+  Private Sub setCBDataFromSC(ByRef sColl As StringCollection, ByVal idx As Integer)
+    addMsg("s")
+    Dim nText As String
+    sCBLock = True
+    If lbxClipboardBuffer.Items.Count > 0 Then
+      addMsg("Get clipboard buffer item data")
+      nText = sColl.Item(idx)
+      setCBData(nText)
+    End If
+
+    addMsg("d")
+  End Sub
+
 
   '----------------------------------------------------------------------------
   Private Sub clearClipboard()
@@ -464,9 +493,15 @@ Public Class Form1
 
   '----------------------------------------------------------------------------
   Private Sub clearBuffer()
-    addMsg("Clear Buffer")
-    clearClipboard()
-    lbxLinks.Text = "<empty>"
+
+    sRecentCollection.Clear()
+
+    lbxClipboardBuffer.DataSource = Nothing
+
+    lbxClipboardBuffer.DataSource = sRecentCollection
+    lbxClipboardBuffer.Text = "<empty>"
+    lbxClipboardBuffer.Invalidate()
+
     tsslCmd.Text = "Clear Buffer"
     addMsg("d")
   End Sub
@@ -539,22 +574,22 @@ Public Class Form1
   End Sub
 
   '----------------------------------------------------------------------------
-  Private Sub lbxClipboardBuffer_DoubleClick(sender As Object, e As EventArgs)
+  Private Sub lbxClipboardBuffer_DoubleClick(sender As Object, e As EventArgs) Handles lbxClipboardBuffer.DoubleClick
     addMsg("lbxClipboardBuffer.DoubleClick")
-    setCBData(sRecentCollection, sender.SelectedIndex)
+    setCBDataFromSC(sRecentCollection, sender.SelectedIndex)
   End Sub
 
 
   Private Sub lbxUniqueBuffer_DoubleClick(sender As Object, e As EventArgs)
     addMsg("lbxUniqueBuffer.DoubleClick")
-    setCBData(sRankedCollection, sender.SelectedIndex)
+    setCBDataFromSC(sRankedCollection, sender.SelectedIndex)
   End Sub
 
 
 
-  Private Sub lbxFavorites_DoubleClick(sender As Object, e As EventArgs)
+  Private Sub lbxFavorites_DoubleClick(sender As Object, e As EventArgs) Handles lbxFavorites.DoubleClick
     addMsg("lbxFavorites.DoubleClick")
-    setCBData(sFavoriteCollection, sender.SelectedIndex)
+    setCBDataFromSC(sFavoriteCollection, sender.SelectedIndex)
   End Sub
 
 
@@ -688,7 +723,7 @@ Public Class Form1
     If tmpIdx < 0 Then
       tmpIdx = 0
     End If
-    setCBData(sFavoriteCollection, tmpIdx)
+    setCBDataFromSC(sFavoriteCollection, tmpIdx)
   End Sub
 
   Private Sub GoToBottomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsmiGoToBottom.Click
@@ -717,11 +752,11 @@ Public Class Form1
     End If
   End Sub
 
-  Private Sub tsbtClearBuffer_Click(sender As Object, e As EventArgs)
+  Private Sub tsbtClearBuffer_Click(sender As Object, e As EventArgs) Handles tsbtClearBuffer.Click
     clearBuffer()
   End Sub
 
-  Private Sub tsbtClearCB_Click(sender As Object, e As EventArgs)
+  Private Sub tsbtClearCB_Click(sender As Object, e As EventArgs) Handles tsbtClearCB.Click
     clearClipboard()
   End Sub
 
@@ -732,4 +767,43 @@ Public Class Form1
   Private Sub tstbClipboard_Click(sender As Object, e As EventArgs)
 
   End Sub
+
+  Private Sub btnTestSound_Click(sender As Object, e As EventArgs) Handles btnTestSound.Click
+    playSound(My.Settings.copyAlertSoundFile)
+  End Sub
+
+  Private Sub btnBrowseAudioFolder_Click(sender As Object, e As EventArgs) Handles btnBrowseAudioFolder.Click
+    If fbdSoundFolder.ShowDialog = DialogResult.OK Then
+      My.Settings.soundFolder = fbdSoundFolder.SelectedPath
+      ofdSoundFile.InitialDirectory = My.Settings.soundFolder
+    End If
+  End Sub
+
+  Private Sub btnPickSoundFile_Click(sender As Object, e As EventArgs) Handles btnPickSoundFile.Click
+    If ofdSoundFile.ShowDialog = DialogResult.OK Then
+      My.Settings.copyAlertSoundFile = ofdSoundFile.FileName
+    End If
+
+  End Sub
+
+  Private Sub ofdSoundFile_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ofdSoundFile.FileOk
+
+  End Sub
+
+  Private Sub btnShowFolder_Click(sender As Object, e As EventArgs) Handles btnShowFolder.Click
+    Process.Start("explorer.exe", My.Settings.soundFolder)
+  End Sub
+
+  Private Sub lbxClipboardBuffer_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+  End Sub
+
+  Private Sub lbxClipboardBuffer_Click(sender As Object, e As EventArgs)
+
+  End Sub
+
+  Private Sub tstbClipboard_DoubleClick(sender As Object, e As EventArgs) Handles tstbClipboard.DoubleClick
+    setCBData(tstbClipboard.Text)
+  End Sub
+
 End Class
