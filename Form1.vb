@@ -3,6 +3,8 @@ Imports System.Net.Mail
 Imports System.Net.Mail.MailAddress
 Imports Microsoft.VisualBasic.CompilerServices
 
+
+
 Public Class Form1
 
   Private cbData As IDataObject = Clipboard.GetDataObject()
@@ -12,16 +14,11 @@ Public Class Form1
   Private copyCount As Integer
   Private unkCount As Integer
 
-  Private locMaxBufferItemSize As Integer
-  Private locMaxBufferTotalSize As Long
-
   Private coUnique As Collection
   Private currentCB As String
 
   Private sTmrEnable As Boolean
   Private sCBLock As Boolean
-  Private sEmailSuzy As MailAddress
-  Private sEmailOdie As MailAddress
   Private sAddressCollection As MailAddressCollection
   Private sFavoriteCollection As StringCollection
   Private sRecentCollection As StringCollection
@@ -57,7 +54,6 @@ Public Class Form1
     End If
 
     Debug.WriteLine(totMsg)
-    lbxConsole.Items.Insert(0, totMsg)
   End Sub
 
 
@@ -76,8 +72,6 @@ Public Class Form1
     totMsg = prfx & "->" & varName & ":" & var
 
     Debug.WriteLine(totMsg)
-    lbxConsole.Items.Insert(0, totMsg)
-
   End Sub
 
 
@@ -101,7 +95,6 @@ Public Class Form1
     totMsg = prfx & "->" & varName & ":" & var
 
     Debug.WriteLine(totMsg)
-    lbxConsole.Items.Insert(0, totMsg)
 
   End Sub
 
@@ -132,48 +125,95 @@ Public Class Form1
 
     Timer1.Enabled = sTmrEnable
 
+
+
     loadSettings()
     updateGui()
+    tbxMaxTotalBufferSize.DataBindings.Add(New System.Windows.Forms.Binding("Text", My.Settings, "maxBufferTotalSize"))
+    tbxMaxItemSize.DataBindings.Add(New System.Windows.Forms.Binding("Text", My.Settings, "maxBufferItemSize"))
 
     addMsg("d")
+  End Sub
+
+  '----------------------------------------------------------------------------
+  Private Sub recent_Sort(descAcend As Boolean)
+    Dim idx As Integer
+    Dim count As Integer = sRecentCollection.Count
+    Dim list As New List(Of String)
+
+    If count > 1 Then
+      addMsg("More than one item in lbx: sort")
+      idx = 0
+      For Each str As String In sRecentCollection
+        list.Add(str)
+      Next
+
+      If descAcend Then
+        list.Sort()
+      Else
+        list.Reverse()
+      End If
+
+      sRecentCollection.Clear()
+      sRecentCollection.AddRange(list.ToArray)
+
+    Else
+      addMsg("One or less items in LB: nothing to sort")
+
+    End If
+
+    updateGui()
+    addMsg("Done")
+  End Sub
+
+
+  '----------------------------------------------------------------------------
+  Private Sub favoriteSort(descAcend As Boolean)
+    Dim idx As Integer
+    Dim count As Integer = sFavoriteCollection.Count
+    Dim list As New List(Of String)
+
+    If count > 1 Then
+      addMsg("More than one item in lbx: sort")
+      idx = 0
+      For Each str As String In sFavoriteCollection
+        addMsg("Populate temp string array for sorting")
+        list.Add(str)
+      Next
+
+      If descAcend Then
+        addMsg("Sort Desc")
+        list.Sort()
+      Else
+        addMsg("Sort Asc")
+        list.Reverse()
+      End If
+
+      addMsg("clear str collection")
+      sFavoriteCollection.Clear()
+
+      addMsg("Repopulate")
+      sFavoriteCollection.AddRange(list.ToArray)
+
+    Else
+      addMsg("One or less items in LB: nothing to sort")
+
+    End If
+
+    updateGui()
+    addMsg("Done")
   End Sub
 
 
   '----------------------------------------------------------------------------
   Private Sub loadSettings()
     addMsg("Load Settings")
-    Dim idx As Integer
-
-
-    Dim tmpAddy00 As New MailAddress(My.Settings.defAddress00, My.Settings.defName00)
-    Dim tmpAddy01 As New MailAddress(My.Settings.defAddress01, My.Settings.defName01)
-
-    locMaxBufferItemSize = My.Settings.maxBufferItemSize
-    locMaxBufferTotalSize = My.Settings.maxBufferTotalSize
-
-    '---Init address Collection
-    If My.Settings.addressCollection Is Nothing Then
-      addMsg("My.Settings.addressCollection Is Nothing")
-      sAddressCollection = New MailAddressCollection From {
-      tmpAddy00,
-      tmpAddy01
-      }
-    Else
-      addMsg("Assign RT addresses")
-      sAddressCollection = My.Settings.addressCollection
-
-    End If
 
     '---load Collections
     loadSettingCollection(My.Settings.recentCollection, sRecentCollection)
     loadSettingCollection(My.Settings.favoriteCollection, sFavoriteCollection)
 
-    '---Populate lists
-    idx = 0
-    For Each a In sAddressCollection
-      cbxEmailTo.Items.Add(a)
-      idx += 1
-    Next
+
 
     addMsg("Loaded Settings")
   End Sub
@@ -195,8 +235,8 @@ Public Class Form1
         addMsg("Size:" & tempSize)
         If destColl.Contains(r) Then
           addMsg("Skipping duplicate")
-        ElseIf tempSize > locMaxBufferItemSize Then
-          addMsg("Skipping item: Exceeds max (" & locMaxBufferItemSize & "b) item size")
+        ElseIf tempSize > My.Settings.maxBufferItemSize Then
+          addMsg("Skipping item: Exceeds max (" & My.Settings.maxBufferItemSize & "b) item size")
         Else
           addMsg("Adding recent")
           destColl.Add(r)
@@ -233,7 +273,7 @@ Public Class Form1
 
     My.Settings.recentCollection = filterCollection(sRecentCollection)
     My.Settings.favoriteCollection = filterCollection(sFavoriteCollection)
-    'My.Settings.addressCollection = sAddressCollection
+
 
     addMsg("Setting updated")
   End Sub
@@ -251,21 +291,18 @@ Public Class Form1
     tsslCopyCount.Text = "Copy Count:" & copyCount
     tsslCOCout.Text = "CO Count:" & coUnique.Count
     tsslCount.Text = iCount
-    tbxMaxItemSize.Text = locMaxBufferItemSize
-    tbxMaxTotalBufferSize.Text = locMaxBufferTotalSize
+    tbxMaxItemSize.Text = My.Settings.maxBufferItemSize
+    tbxMaxTotalBufferSize.Text = My.Settings.maxBufferTotalSize
 
-    lbxClipboardBuffer.DataSource = Nothing
+    lbxRecent.DataSource = Nothing
     lbxFavorites.DataSource = Nothing
 
-    lbxClipboardBuffer.DataSource = sRecentCollection
+    lbxRecent.DataSource = sRecentCollection
     lbxFavorites.DataSource = sFavoriteCollection
-    'lbxClipboardBuffer.SelectedIndex = lbxClipboardBuffer.Items.Count - 1
-
-    'gbxFavorites.Text = "Favorites - " & lbxFavorites.Items.Count
-    tbpBufferRaw.Text = "Buffer - " & lbxClipboardBuffer.Items.Count
+    tbpRecent.Text = "Recent - " & lbxRecent.Items.Count
 
     '---Toolstrip menu item enable handling---
-    If lbxClipboardBuffer.Items.Count < 1 Then
+    If lbxRecent.Items.Count < 1 Then
       tsmiCopyToFav.Enabled = False
       tsmiRemoveBuff.Enabled = False
       tsmiGoToTop.Enabled = False
@@ -292,15 +329,7 @@ Public Class Form1
       tsmiMoveDown.Enabled = True
     End If
 
-    '---Links tab button enabling---
-    If lbxLinks.Items.Count > 0 Then
-      btnFwdLink.Enabled = True
-      cbxEmailTo.Enabled = True
-    Else
-      btnFwdLink.Enabled = False
-      cbxEmailTo.Enabled = False
 
-    End If
   End Sub
 
 
@@ -342,16 +371,29 @@ Public Class Form1
 
   End Sub
 
+  Private Function playSound(fullPath As String) As Boolean
+
+    If System.IO.File.Exists(fullPath) Then
+      My.Computer.Audio.Play(fullPath)
+      Return True
+    Else
+      Console.WriteLine("Error: Invalid file path")
+      'MsgBox("Errorr: Invalid file path", vbOKOnly, "File Error!")
+      Return False
+    End If
+  End Function
+
+
 
   '----------------------------------------------------------------------------
   Private Function procNewCBData() As Integer
-
     If cbContent <> "" Then
       'addMsg("Not empty")
-      If System.IO.File.Exists("C:\Users\Odie\Music\Sounds\Camera Shutter Click.wav") Then
-        My.Computer.Audio.Play("C:\Users\Odie\Music\Sounds\Camera Shutter Click.wav")
-      Else
-        My.Computer.Audio.PlaySystemSound(System.Media.SystemSounds.Asterisk)
+      If My.Settings.enableAlertSound Then
+        If playSound(My.Settings.copyAlertSoundFile) Then
+        Else
+          My.Computer.Audio.PlaySystemSound(System.Media.SystemSounds.Asterisk)
+        End If
       End If
 
 
@@ -389,22 +431,16 @@ Public Class Form1
 
     ElseIf My.Computer.Clipboard.ContainsAudio() Then
       tsslPollStat.Text = "Audio"
-      'updateGui()
-
 
     ElseIf My.Computer.Clipboard.ContainsImage() Then
-
       tsslPollStat.Text = "Image"
-      'updateGui()
-    ElseIf My.Computer.Clipboard.ContainsData(DataFormats.UnicodeText) Then
 
+    ElseIf My.Computer.Clipboard.ContainsData(DataFormats.UnicodeText) Then
       tsslPollStat.Text = "Data"
-      'updateGui()
 
     Else
       unkCount += 1
       tsslPollStat.Text = "Unknown" & unkCount
-      'updateGui()
 
     End If
 
@@ -432,25 +468,43 @@ Public Class Form1
 
 
   '----------------------------------------------------------------------------
-  Private Sub assignCB()
-    If currentCB <> "" Then
+  Private Sub assignCB(nText As String)
+    If nText <> "" Then
       addMsg("Assign the CB to the dbl clicked item data")
-      My.Computer.Clipboard.SetText(currentCB)
+      My.Computer.Clipboard.SetText(nText)
 
     End If
   End Sub
 
   '----------------------------------------------------------------------------
-  Private Sub setCBData(ByRef sColl As StringCollection, ByVal idx As Integer)
+  Private Sub setCBData(nText)
     addMsg("s")
     sCBLock = True
-    addMsg("Get clipboard buffer item data")
-    currentCB = sColl.Item(idx)
-    assignCB()
+    addMsg("Set the current CB to " & nText)
+    currentCB = nText
+    assignCB(currentCB)
     updateGui()
     sCBLock = False
     addMsg("d")
   End Sub
+
+
+  '----------------------------------------------------------------------------
+  Private Sub setCBDataFromSC(ByRef sColl As StringCollection, ByVal idx As Integer)
+    addMsg("s")
+    Dim nText As String
+    sCBLock = True
+    If sColl.Count > 0 Then
+      addMsg("Get clipboard buffer item data")
+      nText = sColl.Item(idx)
+      setCBData(nText)
+    Else
+      addMsg("lbxClipboard buffer is empty")
+    End If
+
+    addMsg("d")
+  End Sub
+
 
   '----------------------------------------------------------------------------
   Private Sub clearClipboard()
@@ -464,11 +518,18 @@ Public Class Form1
 
   '----------------------------------------------------------------------------
   Private Sub clearBuffer()
-    addMsg("Clear Buffer")
-    clearClipboard()
-    lbxLinks.Text = "<empty>"
+
+    sRecentCollection.Clear()
+
+    lbxRecent.DataSource = Nothing
+
+    lbxRecent.DataSource = sRecentCollection
+    lbxRecent.Text = "<empty>"
+    lbxRecent.Invalidate()
+
     tsslCmd.Text = "Clear Buffer"
     addMsg("d")
+    updateGui()
   End Sub
 
   '----------------------------------------------------------------------------
@@ -477,123 +538,106 @@ Public Class Form1
   End Sub
 
 
+  ''----------------------------------------------------------------------------
+  'Sub createMail(body As String, subj As String)
+  '  addMsg("s")
+  '  Try
+  '    addMsg("Create Message")
+  '    Dim newMsg As New MailMessage()
+  '    newMsg.From = sEmailOdie
+  '    newMsg.To.Add(sEmailOdie)
+  '    newMsg.Subject = subj
+  '    newMsg.Body = body
+
+  '    'New MailAddress("suzypeterson@mac.com", "Suzy")
+
+  '    addMsg("Create SMTP Client")
+  '    Dim smtpServer As New SmtpClient()
+  '    Dim userState As Object = newMsg
+  '    addMsg("Create Credentials")
+  '    smtpServer.Credentials = New Net.NetworkCredential("odie@odiesystems.com", "!!Jerome19")
+
+
+  '    addMsg("Set SMTP")
+  '    smtpServer.Port = 587
+  '    smtpServer.Host = "smtp.dreamhost.com"
+
+  '    addMsg("Set callback")
+  '    AddHandler smtpServer.SendCompleted, AddressOf sendCompleted
+  '    addMsg("Sending...")
+
+  '    smtpServer.SendAsync(newMsg, userState)
+
+  '    addMsg("Msg sent asynchronosly")
+
+  '  Catch ex As Exception
+  '    Console.ForegroundColor = ConsoleColor.Red
+  '    addMsg("Class -> ClassStorage, Method -> MyContactByMail, Error -> " & ex.Message)
+  '    Console.WriteLine("Class -> ClassStorage, Method -> MyContactByMail, Error -> " & ex.Message)
+  '  End Try
+
+  '  addMsg("d")
+
+  'End Sub
+
+
+  ''----------------------------------------------------------------------------
+  'Private Sub sendCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+  '  Dim tmpStr As String
+  '  If e.Cancelled Then
+  '    tmpStr = "Mail send was cancelled"
+  '    addMsg(tmpStr)
+  '    MsgBox(tmpStr, vbOKOnly, "Error")
+  '  ElseIf e.Error IsNot Nothing Then
+  '    tmpStr = "Mail failed to send:" + e.Error.Message
+  '    addMsg(tmpStr)
+  '    MsgBox(tmpStr, vbOKOnly, "SMTP Error")
+  '  Else
+  '    tmpStr = "Mail Sent"
+  '    addMsg(tmpStr)
+  '    MsgBox(tmpStr, vbOKOnly, "Mail Status")
+  '  End If
+  'End Sub
+
   '----------------------------------------------------------------------------
-  Sub createMail(body As String, subj As String)
-    addMsg("s")
-    Try
-      addMsg("Create Message")
-      Dim newMsg As New MailMessage()
-      newMsg.From = sEmailOdie
-      newMsg.To.Add(sEmailOdie)
-      newMsg.Subject = subj
-      newMsg.Body = body
-
-      'New MailAddress("suzypeterson@mac.com", "Suzy")
-
-      addMsg("Create SMTP Client")
-      Dim smtpServer As New SmtpClient()
-      Dim userState As Object = newMsg
-      addMsg("Create Credentials")
-      smtpServer.Credentials = New Net.NetworkCredential("odie@odiesystems.com", "!!Jerome19")
-
-
-      addMsg("Set SMTP")
-      smtpServer.Port = 587
-      smtpServer.Host = "smtp.dreamhost.com"
-
-      addMsg("Set callback")
-      AddHandler smtpServer.SendCompleted, AddressOf sendCompleted
-      addMsg("Sending...")
-
-      smtpServer.SendAsync(newMsg, userState)
-
-      addMsg("Msg sent asynchronosly")
-
-    Catch ex As Exception
-      Console.ForegroundColor = ConsoleColor.Red
-      addMsg("Class -> ClassStorage, Method -> MyContactByMail, Error -> " & ex.Message)
-      Console.WriteLine("Class -> ClassStorage, Method -> MyContactByMail, Error -> " & ex.Message)
-    End Try
-
-    addMsg("d")
-
-  End Sub
-
-
-  '----------------------------------------------------------------------------
-  Private Sub sendCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
-    Dim tmpStr As String
-    If e.Cancelled Then
-      tmpStr = "Mail send was cancelled"
-      addMsg(tmpStr)
-      MsgBox(tmpStr, vbOKOnly, "Error")
-    ElseIf e.Error IsNot Nothing Then
-      tmpStr = "Mail failed to send:" + e.Error.Message
-      addMsg(tmpStr)
-      MsgBox(tmpStr, vbOKOnly, "SMTP Error")
-    Else
-      tmpStr = "Mail Sent"
-      addMsg(tmpStr)
-      MsgBox(tmpStr, vbOKOnly, "Mail Status")
-    End If
-  End Sub
-
-  '----------------------------------------------------------------------------
-  Private Sub lbxClipboardBuffer_DoubleClick(sender As Object, e As EventArgs) Handles lbxClipboardBuffer.DoubleClick
-    addMsg("lbxClipboardBuffer.DoubleClick")
-    setCBData(sRecentCollection, sender.SelectedIndex)
-  End Sub
 
 
   Private Sub lbxUniqueBuffer_DoubleClick(sender As Object, e As EventArgs)
     addMsg("lbxUniqueBuffer.DoubleClick")
-    setCBData(sRankedCollection, sender.SelectedIndex)
+    setCBDataFromSC(sRankedCollection, sender.SelectedIndex)
   End Sub
 
 
 
   Private Sub lbxFavorites_DoubleClick(sender As Object, e As EventArgs) Handles lbxFavorites.DoubleClick
     addMsg("lbxFavorites.DoubleClick")
-    setCBData(sFavoriteCollection, sender.SelectedIndex)
+    setCBDataFromSC(sFavoriteCollection, sender.SelectedIndex)
   End Sub
 
 
   '----------------------------------------------------------------------------
-  Private Sub lbxClipboardBuffer_MouseHover(sender As Object, e As EventArgs)
-    ToolTip1.SetToolTip(lbxClipboardBuffer, currentCB)
+  Private Sub lbxRecent_MouseHover(sender As Object, e As EventArgs)
+    ToolTip1.SetToolTip(lbxRecent, currentCB)
   End Sub
 
 
   '----------------------------------------------------------------------------
-  Private Sub tstbClipboard_MouseHover(sender As Object, e As EventArgs) Handles tstbClipboard.MouseHover
+  Private Sub tstbClipboard_MouseHover(sender As Object, e As EventArgs)
     'ToolTip1.SetToolTip(tstbClipboard, currentCB)
     tstbClipboard.ToolTipText = currentCB
   End Sub
 
-  '----------------------------------------------------------------------------
-  Private Sub btnFwdLink_Click(sender As Object, e As EventArgs) Handles btnFwdLink.Click
-    'createMail("This is a test", "Subj: Test")
-    createMail(lbxLinks.Items(0).ToString, "Send a link")
-  End Sub
-
-
-
-  Private Sub cbxEmailTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxEmailTo.SelectedIndexChanged
-    sLinkRecipient = cbxEmailTo.Items(cbxEmailTo.SelectedIndex)
-    addMsg("Fwd recipient email set to " & sLinkRecipient)
-
-  End Sub
 
 
   '----------------------------------------------------------------------------
   Private Sub tsmiCopyToFav_Click(sender As Object, e As EventArgs) Handles tsmiCopyToFav.Click
-    Dim idx As Integer = lbxClipboardBuffer.SelectedIndex
+    Dim idx As Integer = lbxRecent.SelectedIndex
     If idx >= 0 Then
       addMsg("Selected Index:" & idx)
 
       sCBLock = True
       addMsg("Get clipboard buffer item data")
-      currentCB = lbxClipboardBuffer.Items(idx)
+      currentCB = lbxRecent.Items(idx)
 
       If currentCB <> "" Then
         addMsg("Insert item into favorites")
@@ -680,7 +724,7 @@ Public Class Form1
   End Sub
 
   Private Sub GoToTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsmiGoToTop.Click
-    lbxClipboardBuffer.SelectedIndex = 0
+    lbxRecent.SelectedIndex = 0
   End Sub
 
   Private Sub CopyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsmiCopy.Click
@@ -688,15 +732,15 @@ Public Class Form1
     If tmpIdx < 0 Then
       tmpIdx = 0
     End If
-    setCBData(sFavoriteCollection, tmpIdx)
+    setCBDataFromSC(sFavoriteCollection, tmpIdx)
   End Sub
 
   Private Sub GoToBottomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsmiGoToBottom.Click
-    Dim tmpIdx As Integer = lbxClipboardBuffer.Items.Count - 1
+    Dim tmpIdx As Integer = lbxRecent.Items.Count - 1
     If tmpIdx < 0 Then
       tmpIdx = 0
     End If
-    lbxClipboardBuffer.SelectedIndex = tmpIdx
+    lbxRecent.SelectedIndex = tmpIdx
 
   End Sub
 
@@ -710,7 +754,7 @@ Public Class Form1
   End Sub
 
   Private Sub tsmiRemoveBuff_Click(sender As Object, e As EventArgs) Handles tsmiRemoveBuff.Click
-    Dim idx = lbxClipboardBuffer.SelectedIndex
+    Dim idx = lbxRecent.SelectedIndex
     If idx >= 0 Then
       sRecentCollection.RemoveAt(idx)
       updateGui()
@@ -725,7 +769,61 @@ Public Class Form1
     clearClipboard()
   End Sub
 
-  Private Sub btnClearClipboard_Click(sender As Object, e As EventArgs)
+
+  Private Sub btnTestSound_Click(sender As Object, e As EventArgs) Handles btnTestSound.Click
+    playSound(My.Settings.copyAlertSoundFile)
+  End Sub
+
+  Private Sub btnBrowseAudioFolder_Click(sender As Object, e As EventArgs) Handles btnBrowseAudioFolder.Click
+    If fbdSoundFolder.ShowDialog = DialogResult.OK Then
+      My.Settings.soundFolder = fbdSoundFolder.SelectedPath
+      ofdSoundFile.InitialDirectory = My.Settings.soundFolder
+    End If
+  End Sub
+
+  Private Sub btnPickSoundFile_Click(sender As Object, e As EventArgs) Handles btnPickSoundFile.Click
+    If ofdSoundFile.ShowDialog = DialogResult.OK Then
+      My.Settings.copyAlertSoundFile = ofdSoundFile.FileName
+    End If
+
+  End Sub
+
+  Private Sub btnShowFolder_Click(sender As Object, e As EventArgs) Handles btnShowFolder.Click
+    Process.Start("explorer.exe", My.Settings.soundFolder)
+  End Sub
+
+  Private Sub tstbClipboard_DoubleClick(sender As Object, e As EventArgs) Handles tstbClipboard.DoubleClick
+    addMsg("lbxRecent.DoubleClick")
+    setCBDataFromSC(sFavoriteCollection, sender.SelectedIndex)
+    setCBData(tstbClipboard.Text)
+  End Sub
+
+  Private Sub tsbtClearConsole_Click(sender As Object, e As EventArgs)
+    addMsg("tsbtClearConsole.Click")
+  End Sub
+
+  Private Sub tsmiSortAToZ_Click(sender As Object, e As EventArgs) Handles tsmiSortAToZ.Click
+    addMsg("Click")
+    recent_Sort(True)
+  End Sub
+
+  Private Sub tsmiSortZToA_Click(sender As Object, e As EventArgs) Handles tsmiSortZToA.Click
+    addMsg("Click")
+    recent_Sort(False)
+
+  End Sub
+
+  Private Sub lbxRecent_DoubleClick(sender As Object, e As EventArgs) Handles lbxRecent.DoubleClick
+    addMsg("DoubleClick")
+    setCBDataFromSC(sRecentCollection, sender.SelectedIndex)
+  End Sub
+
+  Private Sub tsmiSortAToZ1_Click(sender As Object, e As EventArgs) Handles tsmiSortAToZ1.Click
+    favoriteSort(False)
+  End Sub
+
+  Private Sub tsmiSortZToA1_Click(sender As Object, e As EventArgs) Handles tsmiSortZToA1.Click
+    favoriteSort(True)
 
   End Sub
 End Class
