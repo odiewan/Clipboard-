@@ -29,13 +29,17 @@ Partial Class Form1
     Me.tsmiMoveDown = New System.Windows.Forms.ToolStripMenuItem()
     Me.tsmiMoveToTop = New System.Windows.Forms.ToolStripMenuItem()
     Me.tsmiRemoveFav = New System.Windows.Forms.ToolStripMenuItem()
+    Me.tsmiSortAToZ1 = New System.Windows.Forms.ToolStripMenuItem()
+    Me.tsmiSortZToA1 = New System.Windows.Forms.ToolStripMenuItem()
     Me.Form1BindingSource = New System.Windows.Forms.BindingSource(Me.components)
-    Me.cmsBufferMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+    Me.cmsRecentMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
     Me.tsmiCopyToFav = New System.Windows.Forms.ToolStripMenuItem()
     Me.tsmiRemoveBuff = New System.Windows.Forms.ToolStripMenuItem()
     Me.tsmiGoToTop = New System.Windows.Forms.ToolStripMenuItem()
     Me.tsmiGoToBottom = New System.Windows.Forms.ToolStripMenuItem()
     Me.tsmiCopy = New System.Windows.Forms.ToolStripMenuItem()
+    Me.tsmiSortAToZ = New System.Windows.Forms.ToolStripMenuItem()
+    Me.tsmiSortZToA = New System.Windows.Forms.ToolStripMenuItem()
     Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
     Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
     Me.ssMain = New System.Windows.Forms.StatusStrip()
@@ -48,42 +52,33 @@ Partial Class Form1
     Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
     Me.tspbProg = New System.Windows.Forms.ToolStripProgressBar()
     Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-    Me.cbxEmailTo = New System.Windows.Forms.ComboBox()
-    Me.btnFwdLink = New System.Windows.Forms.Button()
-    Me.btnPickSoundFile = New System.Windows.Forms.Button()
     Me.btnBrowseAudioFolder = New System.Windows.Forms.Button()
     Me.btnTestSound = New System.Windows.Forms.Button()
     Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+    Me.btnPickSoundFile = New System.Windows.Forms.Button()
     Me.EventLog1 = New System.Diagnostics.EventLog()
     Me.gbxClipboard = New System.Windows.Forms.GroupBox()
-    Me.gbBuffer = New System.Windows.Forms.GroupBox()
-    Me.tbctrlBuffer = New System.Windows.Forms.TabControl()
+    Me.gbHistory = New System.Windows.Forms.GroupBox()
+    Me.tbctrlMain = New System.Windows.Forms.TabControl()
     Me.tpFavorites = New System.Windows.Forms.TabPage()
     Me.lbxFavorites = New System.Windows.Forms.ListBox()
-        Me.Form1BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
-        Me.tbpBufferRaw = New System.Windows.Forms.TabPage()
-        Me.lbxClipboardBuffer = New System.Windows.Forms.ListBox()
-        Me.tpLinks = New System.Windows.Forms.TabPage()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.lbxLinks = New System.Windows.Forms.ListBox()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.tpSettings = New System.Windows.Forms.TabPage()
-        Me.gbSettings1 = New System.Windows.Forms.GroupBox()
-        Me.btnShowFolder = New System.Windows.Forms.Button()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.tbxMaxTotalBufferSize = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.tbxMaxItemSize = New System.Windows.Forms.TextBox()
-        Me.tpConsole = New System.Windows.Forms.TabPage()
-        Me.gbConsole = New System.Windows.Forms.GroupBox()
-        Me.lbxConsole = New System.Windows.Forms.ListBox()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+    Me.Form1BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+    Me.tbpRecent = New System.Windows.Forms.TabPage()
+    Me.lbxRecent = New System.Windows.Forms.ListBox()
+    Me.tpSettings = New System.Windows.Forms.TabPage()
+    Me.gbSettings1 = New System.Windows.Forms.GroupBox()
+    Me.btnShowFolder = New System.Windows.Forms.Button()
+    Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+    Me.Label5 = New System.Windows.Forms.Label()
+    Me.TextBox4 = New System.Windows.Forms.TextBox()
+    Me.TextBox3 = New System.Windows.Forms.TextBox()
+    Me.tbxMaxTotalBufferSize = New System.Windows.Forms.TextBox()
+    Me.Label4 = New System.Windows.Forms.Label()
+    Me.Label3 = New System.Windows.Forms.Label()
+    Me.Label2 = New System.Windows.Forms.Label()
+    Me.Label1 = New System.Windows.Forms.Label()
+    Me.tbxMaxItemSize = New System.Windows.Forms.TextBox()
+        Me.tsMain = New System.Windows.Forms.ToolStrip()
         Me.tstbClipboard = New System.Windows.Forms.ToolStripTextBox()
         Me.tsbtClearCB = New System.Windows.Forms.ToolStripButton()
         Me.tsbtClearBuffer = New System.Windows.Forms.ToolStripButton()
@@ -92,30 +87,25 @@ Partial Class Form1
         Me.ofdSoundFile = New System.Windows.Forms.OpenFileDialog()
         Me.cmsFavorites.SuspendLayout()
         CType(Me.Form1BindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.cmsBufferMenu.SuspendLayout()
+        Me.cmsRecentMenu.SuspendLayout()
         Me.ssMain.SuspendLayout()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbxClipboard.SuspendLayout()
-        Me.gbBuffer.SuspendLayout()
-        Me.tbctrlBuffer.SuspendLayout()
+        Me.gbHistory.SuspendLayout()
+        Me.tbctrlMain.SuspendLayout()
         Me.tpFavorites.SuspendLayout()
         CType(Me.Form1BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tbpBufferRaw.SuspendLayout()
-        Me.tpLinks.SuspendLayout()
-        Me.Panel5.SuspendLayout()
-        Me.Panel4.SuspendLayout()
+        Me.tbpRecent.SuspendLayout()
         Me.tpSettings.SuspendLayout()
         Me.gbSettings1.SuspendLayout()
-        Me.tpConsole.SuspendLayout()
-        Me.gbConsole.SuspendLayout()
-        Me.ToolStrip1.SuspendLayout()
+        Me.tsMain.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmsFavorites
         '
-        Me.cmsFavorites.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiMoveUp, Me.tsmiMoveDown, Me.tsmiMoveToTop, Me.tsmiRemoveFav})
+        Me.cmsFavorites.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiMoveUp, Me.tsmiMoveDown, Me.tsmiMoveToTop, Me.tsmiRemoveFav, Me.tsmiSortAToZ1, Me.tsmiSortZToA1})
         Me.cmsFavorites.Name = "cmsFavorites"
-        Me.cmsFavorites.Size = New System.Drawing.Size(197, 92)
+        Me.cmsFavorites.Size = New System.Drawing.Size(197, 136)
         '
         'tsmiMoveUp
         '
@@ -141,11 +131,23 @@ Partial Class Form1
         Me.tsmiRemoveFav.Size = New System.Drawing.Size(196, 22)
         Me.tsmiRemoveFav.Text = "Remove from Favorites"
         '
-        'cmsBufferMenu
+        'tsmiSortAToZ1
         '
-        Me.cmsBufferMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiCopyToFav, Me.tsmiRemoveBuff, Me.tsmiGoToTop, Me.tsmiGoToBottom, Me.tsmiCopy})
-        Me.cmsBufferMenu.Name = "cmsBufferMenu"
-        Me.cmsBufferMenu.Size = New System.Drawing.Size(182, 114)
+        Me.tsmiSortAToZ1.Name = "tsmiSortAToZ1"
+        Me.tsmiSortAToZ1.Size = New System.Drawing.Size(196, 22)
+        Me.tsmiSortAToZ1.Text = "Sort Favorites A to Z"
+        '
+        'tsmiSortZToA1
+        '
+        Me.tsmiSortZToA1.Name = "tsmiSortZToA1"
+        Me.tsmiSortZToA1.Size = New System.Drawing.Size(196, 22)
+        Me.tsmiSortZToA1.Text = "Sort Favorites Z to A"
+        '
+        'cmsRecentMenu
+        '
+        Me.cmsRecentMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiCopyToFav, Me.tsmiRemoveBuff, Me.tsmiGoToTop, Me.tsmiGoToBottom, Me.tsmiCopy, Me.tsmiSortAToZ, Me.tsmiSortZToA})
+        Me.cmsRecentMenu.Name = "cmsBufferMenu"
+        Me.cmsRecentMenu.Size = New System.Drawing.Size(182, 158)
         '
         'tsmiCopyToFav
         '
@@ -176,6 +178,18 @@ Partial Class Form1
         Me.tsmiCopy.Name = "tsmiCopy"
         Me.tsmiCopy.Size = New System.Drawing.Size(181, 22)
         Me.tsmiCopy.Text = "Copy"
+        '
+        'tsmiSortAToZ
+        '
+        Me.tsmiSortAToZ.Name = "tsmiSortAToZ"
+        Me.tsmiSortAToZ.Size = New System.Drawing.Size(181, 22)
+        Me.tsmiSortAToZ.Text = "Sort A to Z"
+        '
+        'tsmiSortZToA
+        '
+        Me.tsmiSortZToA.Name = "tsmiSortZToA"
+        Me.tsmiSortZToA.Size = New System.Drawing.Size(181, 22)
+        Me.tsmiSortZToA.Text = "Sort Z to A"
         '
         'Timer1
         '
@@ -246,39 +260,6 @@ Partial Class Form1
         Me.tspbProg.Name = "tspbProg"
         Me.tspbProg.Size = New System.Drawing.Size(100, 16)
         '
-        'cbxEmailTo
-        '
-        Me.cbxEmailTo.Enabled = False
-        Me.cbxEmailTo.FormattingEnabled = True
-        Me.cbxEmailTo.Location = New System.Drawing.Point(81, 4)
-        Me.cbxEmailTo.Name = "cbxEmailTo"
-        Me.cbxEmailTo.Size = New System.Drawing.Size(262, 21)
-        Me.cbxEmailTo.TabIndex = 1
-        Me.cbxEmailTo.Text = "Select Recipient"
-        Me.ToolTip1.SetToolTip(Me.cbxEmailTo, "Select a recient to fwd copied links")
-        '
-        'btnFwdLink
-        '
-        Me.btnFwdLink.Dock = System.Windows.Forms.DockStyle.Left
-        Me.btnFwdLink.Enabled = False
-        Me.btnFwdLink.Location = New System.Drawing.Point(0, 0)
-        Me.btnFwdLink.Name = "btnFwdLink"
-        Me.btnFwdLink.Size = New System.Drawing.Size(75, 27)
-        Me.btnFwdLink.TabIndex = 0
-        Me.btnFwdLink.Text = "Fwd"
-        Me.ToolTip1.SetToolTip(Me.btnFwdLink, "Fwd selected link to selected recipient")
-        Me.btnFwdLink.UseVisualStyleBackColor = True
-        '
-        'btnPickSoundFile
-        '
-        Me.btnPickSoundFile.Image = Global.Clipboard_Test_Prj.My.Resources.Resources.Folder_action_open
-        Me.btnPickSoundFile.Location = New System.Drawing.Point(228, 95)
-        Me.btnPickSoundFile.Name = "btnPickSoundFile"
-        Me.btnPickSoundFile.Size = New System.Drawing.Size(27, 23)
-        Me.btnPickSoundFile.TabIndex = 12
-        Me.ToolTip1.SetToolTip(Me.btnPickSoundFile, "Select Sound File")
-        Me.btnPickSoundFile.UseVisualStyleBackColor = True
-        '
         'btnBrowseAudioFolder
         '
         Me.btnBrowseAudioFolder.Location = New System.Drawing.Point(265, 121)
@@ -306,6 +287,16 @@ Partial Class Form1
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
         Me.ImageList1.Images.SetKeyName(0, "246.ico")
         '
+        'btnPickSoundFile
+        '
+        Me.btnPickSoundFile.Image = Global.Clipboard_Test_Prj.My.Resources.Resources.Folder_action_open
+        Me.btnPickSoundFile.Location = New System.Drawing.Point(228, 95)
+        Me.btnPickSoundFile.Name = "btnPickSoundFile"
+        Me.btnPickSoundFile.Size = New System.Drawing.Size(27, 23)
+        Me.btnPickSoundFile.TabIndex = 12
+        Me.ToolTip1.SetToolTip(Me.btnPickSoundFile, "Select Sound File")
+        Me.btnPickSoundFile.UseVisualStyleBackColor = True
+        '
         'EventLog1
         '
         Me.EventLog1.SynchronizingObject = Me
@@ -313,8 +304,8 @@ Partial Class Form1
         'gbxClipboard
         '
         Me.gbxClipboard.BackColor = System.Drawing.SystemColors.Control
-        Me.gbxClipboard.Controls.Add(Me.gbBuffer)
-        Me.gbxClipboard.Controls.Add(Me.ToolStrip1)
+        Me.gbxClipboard.Controls.Add(Me.gbHistory)
+        Me.gbxClipboard.Controls.Add(Me.tsMain)
         Me.gbxClipboard.Controls.Add(Me.lblCBContents)
         Me.gbxClipboard.Dock = System.Windows.Forms.DockStyle.Fill
         Me.gbxClipboard.Location = New System.Drawing.Point(0, 0)
@@ -325,32 +316,31 @@ Partial Class Form1
         Me.gbxClipboard.TabStop = False
         Me.gbxClipboard.Text = "Current Clipboard"
         '
-        'gbBuffer
+        'gbHistory
         '
-        Me.gbBuffer.Controls.Add(Me.tbctrlBuffer)
-        Me.gbBuffer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbBuffer.Location = New System.Drawing.Point(3, 41)
-        Me.gbBuffer.Name = "gbBuffer"
-        Me.gbBuffer.Padding = New System.Windows.Forms.Padding(2)
-        Me.gbBuffer.Size = New System.Drawing.Size(312, 268)
-        Me.gbBuffer.TabIndex = 0
-        Me.gbBuffer.TabStop = False
-        Me.gbBuffer.Text = "Clipboard History"
+        Me.gbHistory.Controls.Add(Me.tbctrlMain)
+        Me.gbHistory.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gbHistory.Location = New System.Drawing.Point(3, 41)
+        Me.gbHistory.Name = "gbHistory"
+        Me.gbHistory.Padding = New System.Windows.Forms.Padding(2)
+        Me.gbHistory.Size = New System.Drawing.Size(312, 268)
+        Me.gbHistory.TabIndex = 0
+        Me.gbHistory.TabStop = False
+        Me.gbHistory.Text = "Clipboard History"
         '
-        'tbctrlBuffer
+        'tbctrlMain
         '
-        Me.tbctrlBuffer.Controls.Add(Me.tpFavorites)
-        Me.tbctrlBuffer.Controls.Add(Me.tbpBufferRaw)
-        Me.tbctrlBuffer.Controls.Add(Me.tpLinks)
-        Me.tbctrlBuffer.Controls.Add(Me.tpSettings)
-        Me.tbctrlBuffer.Controls.Add(Me.tpConsole)
-        Me.tbctrlBuffer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbctrlBuffer.Location = New System.Drawing.Point(2, 15)
-        Me.tbctrlBuffer.Margin = New System.Windows.Forms.Padding(2)
-        Me.tbctrlBuffer.Name = "tbctrlBuffer"
-        Me.tbctrlBuffer.SelectedIndex = 0
-        Me.tbctrlBuffer.Size = New System.Drawing.Size(308, 251)
-        Me.tbctrlBuffer.TabIndex = 7
+        Me.tbctrlMain.ContextMenuStrip = Me.cmsFavorites
+        Me.tbctrlMain.Controls.Add(Me.tpFavorites)
+        Me.tbctrlMain.Controls.Add(Me.tbpRecent)
+        Me.tbctrlMain.Controls.Add(Me.tpSettings)
+        Me.tbctrlMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tbctrlMain.Location = New System.Drawing.Point(2, 15)
+        Me.tbctrlMain.Margin = New System.Windows.Forms.Padding(2)
+        Me.tbctrlMain.Name = "tbctrlMain"
+        Me.tbctrlMain.SelectedIndex = 0
+        Me.tbctrlMain.Size = New System.Drawing.Size(308, 251)
+        Me.tbctrlMain.TabIndex = 7
         '
         'tpFavorites
         '
@@ -380,71 +370,30 @@ Partial Class Form1
         '
         Me.Form1BindingSource1.DataSource = GetType(Clipboard_Test_Prj.Form1)
         '
-        'tbpBufferRaw
+        'tbpRecent
         '
-        Me.tbpBufferRaw.Controls.Add(Me.lbxClipboardBuffer)
-        Me.tbpBufferRaw.Location = New System.Drawing.Point(4, 22)
-        Me.tbpBufferRaw.Margin = New System.Windows.Forms.Padding(2)
-        Me.tbpBufferRaw.Name = "tbpBufferRaw"
-        Me.tbpBufferRaw.Padding = New System.Windows.Forms.Padding(2)
-        Me.tbpBufferRaw.Size = New System.Drawing.Size(300, 225)
-        Me.tbpBufferRaw.TabIndex = 0
-        Me.tbpBufferRaw.Text = "Buffer"
-        Me.tbpBufferRaw.UseVisualStyleBackColor = True
+        Me.tbpRecent.Controls.Add(Me.lbxRecent)
+        Me.tbpRecent.Location = New System.Drawing.Point(4, 22)
+        Me.tbpRecent.Margin = New System.Windows.Forms.Padding(2)
+        Me.tbpRecent.Name = "tbpRecent"
+        Me.tbpRecent.Padding = New System.Windows.Forms.Padding(2)
+        Me.tbpRecent.Size = New System.Drawing.Size(300, 225)
+        Me.tbpRecent.TabIndex = 0
+        Me.tbpRecent.Text = "Recent"
+        Me.tbpRecent.UseVisualStyleBackColor = True
         '
-        'lbxClipboardBuffer
+        'lbxRecent
         '
-        Me.lbxClipboardBuffer.ContextMenuStrip = Me.cmsBufferMenu
-        Me.lbxClipboardBuffer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbxClipboardBuffer.FormattingEnabled = True
-        Me.lbxClipboardBuffer.HorizontalScrollbar = True
-        Me.lbxClipboardBuffer.Location = New System.Drawing.Point(2, 2)
-        Me.lbxClipboardBuffer.Margin = New System.Windows.Forms.Padding(2)
-        Me.lbxClipboardBuffer.Name = "lbxClipboardBuffer"
-        Me.lbxClipboardBuffer.ScrollAlwaysVisible = True
-        Me.lbxClipboardBuffer.Size = New System.Drawing.Size(296, 221)
-        Me.lbxClipboardBuffer.TabIndex = 6
-        '
-        'tpLinks
-        '
-        Me.tpLinks.Controls.Add(Me.Panel5)
-        Me.tpLinks.Controls.Add(Me.Panel4)
-        Me.tpLinks.Location = New System.Drawing.Point(4, 22)
-        Me.tpLinks.Name = "tpLinks"
-        Me.tpLinks.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpLinks.Size = New System.Drawing.Size(300, 225)
-        Me.tpLinks.TabIndex = 3
-        Me.tpLinks.Text = "Links"
-        Me.tpLinks.UseVisualStyleBackColor = True
-        '
-        'Panel5
-        '
-        Me.Panel5.Controls.Add(Me.lbxLinks)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(3, 32)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(294, 190)
-        Me.Panel5.TabIndex = 2
-        '
-        'lbxLinks
-        '
-        Me.lbxLinks.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbxLinks.FormattingEnabled = True
-        Me.lbxLinks.Location = New System.Drawing.Point(0, 0)
-        Me.lbxLinks.Name = "lbxLinks"
-        Me.lbxLinks.Size = New System.Drawing.Size(294, 190)
-        Me.lbxLinks.TabIndex = 1
-        '
-        'Panel4
-        '
-        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel4.Controls.Add(Me.cbxEmailTo)
-        Me.Panel4.Controls.Add(Me.btnFwdLink)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel4.Location = New System.Drawing.Point(3, 3)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(294, 29)
-        Me.Panel4.TabIndex = 0
+        Me.lbxRecent.ContextMenuStrip = Me.cmsRecentMenu
+        Me.lbxRecent.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lbxRecent.FormattingEnabled = True
+        Me.lbxRecent.HorizontalScrollbar = True
+        Me.lbxRecent.Location = New System.Drawing.Point(2, 2)
+        Me.lbxRecent.Margin = New System.Windows.Forms.Padding(2)
+        Me.lbxRecent.Name = "lbxRecent"
+        Me.lbxRecent.ScrollAlwaysVisible = True
+        Me.lbxRecent.Size = New System.Drawing.Size(296, 221)
+        Me.lbxRecent.TabIndex = 6
         '
         'tpSettings
         '
@@ -581,46 +530,14 @@ Partial Class Form1
         Me.tbxMaxItemSize.Size = New System.Drawing.Size(142, 20)
         Me.tbxMaxItemSize.TabIndex = 0
         '
-        'tpConsole
+        'tsMain
         '
-        Me.tpConsole.Controls.Add(Me.gbConsole)
-        Me.tpConsole.Location = New System.Drawing.Point(4, 22)
-        Me.tpConsole.Name = "tpConsole"
-        Me.tpConsole.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpConsole.Size = New System.Drawing.Size(300, 225)
-        Me.tpConsole.TabIndex = 6
-        Me.tpConsole.Text = "Console Log"
-        Me.tpConsole.UseVisualStyleBackColor = True
-        '
-        'gbConsole
-        '
-        Me.gbConsole.Controls.Add(Me.lbxConsole)
-        Me.gbConsole.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbConsole.Location = New System.Drawing.Point(3, 3)
-        Me.gbConsole.Name = "gbConsole"
-        Me.gbConsole.Padding = New System.Windows.Forms.Padding(2)
-        Me.gbConsole.Size = New System.Drawing.Size(294, 219)
-        Me.gbConsole.TabIndex = 1
-        Me.gbConsole.TabStop = False
-        Me.gbConsole.Text = "Console"
-        '
-        'lbxConsole
-        '
-        Me.lbxConsole.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbxConsole.FormattingEnabled = True
-        Me.lbxConsole.Location = New System.Drawing.Point(2, 15)
-        Me.lbxConsole.Name = "lbxConsole"
-        Me.lbxConsole.Size = New System.Drawing.Size(290, 202)
-        Me.lbxConsole.TabIndex = 0
-        '
-        'ToolStrip1
-        '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tstbClipboard, Me.tsbtClearCB, Me.tsbtClearBuffer})
-        Me.ToolStrip1.Location = New System.Drawing.Point(3, 16)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(312, 25)
-        Me.ToolStrip1.TabIndex = 1
-        Me.ToolStrip1.Text = "ToolStrip1"
+        Me.tsMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tstbClipboard, Me.tsbtClearCB, Me.tsbtClearBuffer})
+        Me.tsMain.Location = New System.Drawing.Point(3, 16)
+        Me.tsMain.Name = "tsMain"
+        Me.tsMain.Size = New System.Drawing.Size(312, 25)
+        Me.tsMain.TabIndex = 1
+        Me.tsMain.Text = "ToolStrip1"
         '
         'tstbClipboard
         '
@@ -683,27 +600,22 @@ Partial Class Form1
         Me.Text = "Clipboard++"
         Me.cmsFavorites.ResumeLayout(False)
         CType(Me.Form1BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.cmsBufferMenu.ResumeLayout(False)
+        Me.cmsRecentMenu.ResumeLayout(False)
         Me.ssMain.ResumeLayout(False)
         Me.ssMain.PerformLayout()
         CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbxClipboard.ResumeLayout(False)
         Me.gbxClipboard.PerformLayout()
-        Me.gbBuffer.ResumeLayout(False)
-        Me.tbctrlBuffer.ResumeLayout(False)
+        Me.gbHistory.ResumeLayout(False)
+        Me.tbctrlMain.ResumeLayout(False)
         Me.tpFavorites.ResumeLayout(False)
         CType(Me.Form1BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tbpBufferRaw.ResumeLayout(False)
-        Me.tpLinks.ResumeLayout(False)
-        Me.Panel5.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
+        Me.tbpRecent.ResumeLayout(False)
         Me.tpSettings.ResumeLayout(False)
         Me.gbSettings1.ResumeLayout(False)
         Me.gbSettings1.PerformLayout()
-        Me.tpConsole.ResumeLayout(False)
-        Me.gbConsole.ResumeLayout(False)
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
+        Me.tsMain.ResumeLayout(False)
+        Me.tsMain.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -720,7 +632,7 @@ Partial Class Form1
   Friend WithEvents tsslCOCout As ToolStripStatusLabel
   Friend WithEvents tsslPollStat As ToolStripStatusLabel
   Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
-  Friend WithEvents cmsBufferMenu As ContextMenuStrip
+  Friend WithEvents cmsRecentMenu As ContextMenuStrip
   Friend WithEvents tsmiCopyToFav As ToolStripMenuItem
   Friend WithEvents cmsFavorites As ContextMenuStrip
   Friend WithEvents tsmiMoveUp As ToolStripMenuItem
@@ -734,44 +646,39 @@ Partial Class Form1
   Friend WithEvents tsmiRemoveFav As ToolStripMenuItem
   Friend WithEvents tspbProg As ToolStripProgressBar
   Friend WithEvents gbxClipboard As GroupBox
-  Friend WithEvents gbBuffer As GroupBox
-  Friend WithEvents tbctrlBuffer As TabControl
+  Friend WithEvents gbHistory As GroupBox
+  Friend WithEvents tbctrlMain As TabControl
   Friend WithEvents tpFavorites As TabPage
   Friend WithEvents lbxFavorites As ListBox
-  Friend WithEvents tbpBufferRaw As TabPage
-  Friend WithEvents lbxClipboardBuffer As ListBox
-  Friend WithEvents tpLinks As TabPage
-  Friend WithEvents Panel5 As Panel
-  Friend WithEvents lbxLinks As ListBox
-  Friend WithEvents Panel4 As Panel
-  Friend WithEvents cbxEmailTo As ComboBox
-  Friend WithEvents btnFwdLink As Button
-  Friend WithEvents tpSettings As TabPage
-  Friend WithEvents gbSettings1 As GroupBox
-  Friend WithEvents TextBox4 As TextBox
-  Friend WithEvents TextBox3 As TextBox
-  Friend WithEvents tbxMaxTotalBufferSize As TextBox
-  Friend WithEvents Label4 As Label
-  Friend WithEvents Label3 As Label
-  Friend WithEvents Label2 As Label
-  Friend WithEvents Label1 As Label
-  Friend WithEvents tbxMaxItemSize As TextBox
-  Friend WithEvents tpConsole As TabPage
-  Friend WithEvents gbConsole As GroupBox
-  Friend WithEvents lbxConsole As ListBox
-  Friend WithEvents ToolStrip1 As ToolStrip
-  Friend WithEvents tstbClipboard As ToolStripTextBox
-  Friend WithEvents tsbtClearCB As ToolStripButton
-  Friend WithEvents tsbtClearBuffer As ToolStripButton
-  Friend WithEvents lblCBContents As Label
-  Friend WithEvents Label5 As Label
-  Friend WithEvents CheckBox1 As CheckBox
-  Friend WithEvents btnTestSound As Button
-  Friend WithEvents btnBrowseAudioFolder As Button
-  Friend WithEvents fbdSoundFolder As FolderBrowserDialog
-  Friend WithEvents ofdSoundFile As OpenFileDialog
-  Friend WithEvents btnPickSoundFile As Button
-  Friend WithEvents btnShowFolder As Button
-  Friend WithEvents ImageList1 As ImageList
+  Friend WithEvents tbpRecent As TabPage
+  Friend WithEvents lbxRecent As ListBox
+    Friend WithEvents tpSettings As TabPage
+    Friend WithEvents gbSettings1 As GroupBox
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents tbxMaxTotalBufferSize As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents tbxMaxItemSize As TextBox
+    Friend WithEvents tsMain As ToolStrip
+    Friend WithEvents tstbClipboard As ToolStripTextBox
+    Friend WithEvents tsbtClearCB As ToolStripButton
+    Friend WithEvents tsbtClearBuffer As ToolStripButton
+    Friend WithEvents lblCBContents As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents btnTestSound As Button
+    Friend WithEvents btnBrowseAudioFolder As Button
+    Friend WithEvents fbdSoundFolder As FolderBrowserDialog
+    Friend WithEvents ofdSoundFile As OpenFileDialog
+    Friend WithEvents btnShowFolder As Button
+    Friend WithEvents ImageList1 As ImageList
     Friend WithEvents Form1BindingSource1 As BindingSource
+    Friend WithEvents tsmiSortAToZ As ToolStripMenuItem
+    Friend WithEvents tsmiSortZToA As ToolStripMenuItem
+    Friend WithEvents tsmiSortAToZ1 As ToolStripMenuItem
+    Friend WithEvents tsmiSortZToA1 As ToolStripMenuItem
+    Friend WithEvents btnPickSoundFile As Button
 End Class
