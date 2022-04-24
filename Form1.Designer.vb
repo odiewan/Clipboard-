@@ -31,6 +31,7 @@ Partial Class Form1
         Me.tsmiRemoveFav = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiSortAToZ1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiSortZToA1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FindToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Form1BindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.cmsRecentMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.tsmiCopyToFav = New System.Windows.Forms.ToolStripMenuItem()
@@ -40,6 +41,7 @@ Partial Class Form1
         Me.tsmiCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiSortAToZ = New System.Windows.Forms.ToolStripMenuItem()
         Me.tsmiSortZToA = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FindToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.ssMain = New System.Windows.Forms.StatusStrip()
@@ -65,6 +67,12 @@ Partial Class Form1
         Me.Form1BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
         Me.tbpRecent = New System.Windows.Forms.TabPage()
         Me.lbxRecent = New System.Windows.Forms.ListBox()
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.tstbRecentFind = New System.Windows.Forms.ToolStripTextBox()
+        Me.tsbtRecentFind = New System.Windows.Forms.ToolStripButton()
+        Me.tsbtRecentCase = New System.Windows.Forms.ToolStripButton()
+        Me.tsbtRecentWhole = New System.Windows.Forms.ToolStripButton()
+        Me.tsslResult = New System.Windows.Forms.ToolStripLabel()
         Me.tpSettings = New System.Windows.Forms.TabPage()
         Me.gbSettings1 = New System.Windows.Forms.GroupBox()
         Me.btnShowFolder = New System.Windows.Forms.Button()
@@ -96,6 +104,7 @@ Partial Class Form1
         Me.tpFavorites.SuspendLayout()
         CType(Me.Form1BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpRecent.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.tpSettings.SuspendLayout()
         Me.gbSettings1.SuspendLayout()
         Me.tsMain.SuspendLayout()
@@ -103,9 +112,9 @@ Partial Class Form1
         '
         'cmsFavorites
         '
-        Me.cmsFavorites.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiMoveUp, Me.tsmiMoveDown, Me.tsmiMoveToTop, Me.tsmiRemoveFav, Me.tsmiSortAToZ1, Me.tsmiSortZToA1})
+        Me.cmsFavorites.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiMoveUp, Me.tsmiMoveDown, Me.tsmiMoveToTop, Me.tsmiRemoveFav, Me.tsmiSortAToZ1, Me.tsmiSortZToA1, Me.FindToolStripMenuItem})
         Me.cmsFavorites.Name = "cmsFavorites"
-        Me.cmsFavorites.Size = New System.Drawing.Size(197, 136)
+        Me.cmsFavorites.Size = New System.Drawing.Size(197, 158)
         '
         'tsmiMoveUp
         '
@@ -143,17 +152,23 @@ Partial Class Form1
         Me.tsmiSortZToA1.Size = New System.Drawing.Size(196, 22)
         Me.tsmiSortZToA1.Text = "Sort Favorites Z to A"
         '
+        'FindToolStripMenuItem
+        '
+        Me.FindToolStripMenuItem.Name = "FindToolStripMenuItem"
+        Me.FindToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
+        Me.FindToolStripMenuItem.Text = "Find..."
+        '
         'cmsRecentMenu
         '
-        Me.cmsRecentMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiCopyToFav, Me.tsmiRemoveBuff, Me.tsmiGoToTop, Me.tsmiGoToBottom, Me.tsmiCopy, Me.tsmiSortAToZ, Me.tsmiSortZToA})
+        Me.cmsRecentMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiCopyToFav, Me.tsmiRemoveBuff, Me.tsmiGoToTop, Me.tsmiGoToBottom, Me.tsmiCopy, Me.tsmiSortAToZ, Me.tsmiSortZToA, Me.FindToolStripMenuItem1})
         Me.cmsRecentMenu.Name = "cmsBufferMenu"
-        Me.cmsRecentMenu.Size = New System.Drawing.Size(182, 158)
+        Me.cmsRecentMenu.Size = New System.Drawing.Size(182, 180)
         '
         'tsmiCopyToFav
         '
         Me.tsmiCopyToFav.Name = "tsmiCopyToFav"
         Me.tsmiCopyToFav.Size = New System.Drawing.Size(181, 22)
-        Me.tsmiCopyToFav.Text = "Move to Favorites"
+        Me.tsmiCopyToFav.Text = "Add to Favorites"
         '
         'tsmiRemoveBuff
         '
@@ -190,6 +205,12 @@ Partial Class Form1
         Me.tsmiSortZToA.Name = "tsmiSortZToA"
         Me.tsmiSortZToA.Size = New System.Drawing.Size(181, 22)
         Me.tsmiSortZToA.Text = "Sort Z to A"
+        '
+        'FindToolStripMenuItem1
+        '
+        Me.FindToolStripMenuItem1.Name = "FindToolStripMenuItem1"
+        Me.FindToolStripMenuItem1.Size = New System.Drawing.Size(181, 22)
+        Me.FindToolStripMenuItem1.Text = "Find..."
         '
         'Timer1
         '
@@ -369,6 +390,7 @@ Partial Class Form1
         'tbpRecent
         '
         Me.tbpRecent.Controls.Add(Me.lbxRecent)
+        Me.tbpRecent.Controls.Add(Me.ToolStrip1)
         Me.tbpRecent.Location = New System.Drawing.Point(4, 22)
         Me.tbpRecent.Margin = New System.Windows.Forms.Padding(2)
         Me.tbpRecent.Name = "tbpRecent"
@@ -384,12 +406,64 @@ Partial Class Form1
         Me.lbxRecent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lbxRecent.FormattingEnabled = True
         Me.lbxRecent.HorizontalScrollbar = True
-        Me.lbxRecent.Location = New System.Drawing.Point(2, 2)
+        Me.lbxRecent.Location = New System.Drawing.Point(2, 27)
         Me.lbxRecent.Margin = New System.Windows.Forms.Padding(2)
         Me.lbxRecent.Name = "lbxRecent"
         Me.lbxRecent.ScrollAlwaysVisible = True
-        Me.lbxRecent.Size = New System.Drawing.Size(296, 221)
-        Me.lbxRecent.TabIndex = 6
+        Me.lbxRecent.Size = New System.Drawing.Size(296, 196)
+        Me.lbxRecent.TabIndex = 8
+        '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tstbRecentFind, Me.tsbtRecentFind, Me.tsbtRecentCase, Me.tsbtRecentWhole, Me.tsslResult})
+        Me.ToolStrip1.Location = New System.Drawing.Point(2, 2)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(296, 25)
+        Me.ToolStrip1.TabIndex = 7
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'tstbRecentFind
+        '
+        Me.tstbRecentFind.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.tstbRecentFind.Name = "tstbRecentFind"
+        Me.tstbRecentFind.Size = New System.Drawing.Size(100, 25)
+        Me.tstbRecentFind.Text = "Search recent..."
+        '
+        'tsbtRecentFind
+        '
+        Me.tsbtRecentFind.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtRecentFind.Image = CType(resources.GetObject("tsbtRecentFind.Image"), System.Drawing.Image)
+        Me.tsbtRecentFind.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtRecentFind.Name = "tsbtRecentFind"
+        Me.tsbtRecentFind.Size = New System.Drawing.Size(23, 22)
+        Me.tsbtRecentFind.Text = "ToolStripButton1"
+        '
+        'tsbtRecentCase
+        '
+        Me.tsbtRecentCase.CheckOnClick = True
+        Me.tsbtRecentCase.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtRecentCase.Image = CType(resources.GetObject("tsbtRecentCase.Image"), System.Drawing.Image)
+        Me.tsbtRecentCase.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtRecentCase.Name = "tsbtRecentCase"
+        Me.tsbtRecentCase.Size = New System.Drawing.Size(23, 22)
+        Me.tsbtRecentCase.Text = "ToolStripButton2"
+        '
+        'tsbtRecentWhole
+        '
+        Me.tsbtRecentWhole.CheckOnClick = True
+        Me.tsbtRecentWhole.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.tsbtRecentWhole.Image = CType(resources.GetObject("tsbtRecentWhole.Image"), System.Drawing.Image)
+        Me.tsbtRecentWhole.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtRecentWhole.Name = "tsbtRecentWhole"
+        Me.tsbtRecentWhole.Size = New System.Drawing.Size(32, 22)
+        Me.tsbtRecentWhole.Text = "[ab]"
+        Me.tsbtRecentWhole.ToolTipText = "Find whole word" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        '
+        'tsslResult
+        '
+        Me.tsslResult.Name = "tsslResult"
+        Me.tsslResult.Size = New System.Drawing.Size(68, 22)
+        Me.tsslResult.Text = "Find Result:"
         '
         'tpSettings
         '
@@ -593,7 +667,7 @@ Partial Class Form1
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MinimumSize = New System.Drawing.Size(334, 373)
         Me.Name = "Form1"
-        Me.Text = "Clipboard++"
+        Me.Text = "Clipboard++ 20220422"
         Me.cmsFavorites.ResumeLayout(False)
         CType(Me.Form1BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmsRecentMenu.ResumeLayout(False)
@@ -607,6 +681,9 @@ Partial Class Form1
         Me.tpFavorites.ResumeLayout(False)
         CType(Me.Form1BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpRecent.ResumeLayout(False)
+        Me.tbpRecent.PerformLayout()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.tpSettings.ResumeLayout(False)
         Me.gbSettings1.ResumeLayout(False)
         Me.gbSettings1.PerformLayout()
@@ -647,7 +724,6 @@ Partial Class Form1
   Friend WithEvents tpFavorites As TabPage
   Friend WithEvents lbxFavorites As ListBox
   Friend WithEvents tbpRecent As TabPage
-  Friend WithEvents lbxRecent As ListBox
     Friend WithEvents tpSettings As TabPage
     Friend WithEvents gbSettings1 As GroupBox
     Friend WithEvents TextBox4 As TextBox
@@ -677,4 +753,13 @@ Partial Class Form1
     Friend WithEvents tsmiSortAToZ1 As ToolStripMenuItem
     Friend WithEvents tsmiSortZToA1 As ToolStripMenuItem
     Friend WithEvents btnPickSoundFile As Button
+    Friend WithEvents FindToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FindToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents lbxRecent As ListBox
+    Friend WithEvents ToolStrip1 As ToolStrip
+    Friend WithEvents tstbRecentFind As ToolStripTextBox
+    Friend WithEvents tsbtRecentFind As ToolStripButton
+    Friend WithEvents tsbtRecentCase As ToolStripButton
+    Friend WithEvents tsbtRecentWhole As ToolStripButton
+    Friend WithEvents tsslResult As ToolStripLabel
 End Class
