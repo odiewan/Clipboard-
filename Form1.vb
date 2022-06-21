@@ -7,29 +7,40 @@ Imports Microsoft.VisualBasic.CompilerServices
 
 Public Class Form1
 
-  Private cbData As IDataObject = Clipboard.GetDataObject()
+    Private cbData As IDataObject = Clipboard.GetDataObject()
 
-  Private cbContent As String
-  Private iCount As Integer
-  Private copyCount As Integer
-  Private unkCount As Integer
+    Private cbContent As String
+    Private iCount As Integer
+    Private copyCount As Integer
+    Private unkCount As Integer
 
-  Private coUnique As Collection
-  Private currentCB As String
+    Private coUnique As Collection
+    Private currentCB As String
+    Private sTmrEnable As Boolean
+    Private sCBLock As Boolean
+    Private sAddressCollection As MailAddressCollection
+    Private sFavoriteCollection As StringCollection
+    Private sRecentCollection As StringCollection
+    Private sRankedCollection As StringCollection
+    Private _searchOption = SearchType.SRCH_NOM
 
-  Private sTmrEnable As Boolean
-  Private sCBLock As Boolean
-  Private sAddressCollection As MailAddressCollection
-  Private sFavoriteCollection As StringCollection
-  Private sRecentCollection As StringCollection
-  Private sRankedCollection As StringCollection
 
 
 
-  Private sLinkRecipient As String = "Unspecified"
+    Private sLinkRecipient As String = "Unspecified"
 
-  '----------------------------------------------------------------------------
-  Private Sub addMsg(msg As String)
+    Enum SearchType
+        SRCH_NOM
+        'SRCH_CASE_SENSITIVE
+        'SRCH_WHOLE_WORD
+        SRCH_EXACT
+        NUM_SRCH_TYPES
+    End Enum
+
+
+
+    '----------------------------------------------------------------------------
+    Private Sub addMsg(msg As String)
     Dim prfx As String
     Dim totMsg As String
 
@@ -53,8 +64,8 @@ Public Class Form1
       totMsg = prfx
     End If
 
-    Debug.WriteLine(totMsg)
-  End Sub
+        Debug.Print(totMsg)
+    End Sub
 
 
   '----------------------------------------------------------------------------
@@ -446,8 +457,45 @@ Public Class Form1
 
   End Sub
 
-  '----------------------------------------------------------------------------
-  Private Sub btnGetCB_Click(sender As Object, e As EventArgs)
+    Private Sub find()
+        Dim start As Integer = 0
+        Dim idx As Integer
+        Dim foundCnt As Integer
+        Dim searchStr = tstbRecentFind.Text
+        lbxRecent.SelectionMode = SelectionMode.MultiSimple
+        lbxRecent.SelectedItems.Clear()
+
+        If searchStr IsNot "" Then
+            If _searchOption = SearchType.SRCH_EXACT Then
+                idx = lbxRecent.FindStringExact(searchStr, start)
+            Else
+                idx = lbxRecent.FindString(searchStr, start)
+            End If
+            Do While idx <> -1 And start < lbxRecent.Items.Count
+                lbxRecent.SetSelected(idx, True)
+                If _searchOption = SearchType.SRCH_EXACT Then
+                    idx = lbxRecent.FindStringExact(searchStr, start)
+                Else
+                    idx = lbxRecent.FindString(searchStr, start)
+                End If
+                start += 1
+            Loop
+
+
+            If idx > -1 Then
+                tsslResult.Text = "Found " & foundCnt.ToString & " instances"
+            Else
+                tsslResult.Text = "String not found"
+            End If
+
+        Else
+            tsslResult.Text = "Search String Empty"
+        End If
+
+    End Sub
+
+    '----------------------------------------------------------------------------
+    Private Sub btnGetCB_Click(sender As Object, e As EventArgs)
     addMsg("s")
     getClipboardContent()
     addMsg("d")
@@ -538,91 +586,84 @@ Public Class Form1
   End Sub
 
 
-  ''----------------------------------------------------------------------------
-  'Sub createMail(body As String, subj As String)
-  '  addMsg("s")
-  '  Try
-  '    addMsg("Create Message")
-  '    Dim newMsg As New MailMessage()
-  '    newMsg.From = sEmailOdie
-  '    newMsg.To.Add(sEmailOdie)
-  '    newMsg.Subject = subj
-  '    newMsg.Body = body
+    ''----------------------------------------------------------------------------
+    'Sub createMail(body As String, subj As String)
+    '  addMsg("s")
+    '  Try
+    '    addMsg("Create Message")
+    '    Dim newMsg As New MailMessage()
+    '    newMsg.From = sEmailOdie
+    '    newMsg.To.Add(sEmailOdie)
+    '    newMsg.Subject = subj
+    '    newMsg.Body = body
 
-  '    'New MailAddress("suzypeterson@mac.com", "Suzy")
+    '    'New MailAddress("suzypeterson@mac.com", "Suzy")
 
-  '    addMsg("Create SMTP Client")
-  '    Dim smtpServer As New SmtpClient()
-  '    Dim userState As Object = newMsg
-  '    addMsg("Create Credentials")
-  '    smtpServer.Credentials = New Net.NetworkCredential("odie@odiesystems.com", "!!Jerome19")
-
-
-  '    addMsg("Set SMTP")
-  '    smtpServer.Port = 587
-  '    smtpServer.Host = "smtp.dreamhost.com"
-
-  '    addMsg("Set callback")
-  '    AddHandler smtpServer.SendCompleted, AddressOf sendCompleted
-  '    addMsg("Sending...")
-
-  '    smtpServer.SendAsync(newMsg, userState)
-
-  '    addMsg("Msg sent asynchronosly")
-
-  '  Catch ex As Exception
-  '    Console.ForegroundColor = ConsoleColor.Red
-  '    addMsg("Class -> ClassStorage, Method -> MyContactByMail, Error -> " & ex.Message)
-  '    Console.WriteLine("Class -> ClassStorage, Method -> MyContactByMail, Error -> " & ex.Message)
-  '  End Try
-
-  '  addMsg("d")
-
-  'End Sub
+    '    addMsg("Create SMTP Client")
+    '    Dim smtpServer As New SmtpClient()
+    '    Dim userState As Object = newMsg
+    '    addMsg("Create Credentials")
+    '    smtpServer.Credentials = New Net.NetworkCredential("odie@odiesystems.com", "!!Jerome19")
 
 
-  ''----------------------------------------------------------------------------
-  'Private Sub sendCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
-  '  Dim tmpStr As String
-  '  If e.Cancelled Then
-  '    tmpStr = "Mail send was cancelled"
-  '    addMsg(tmpStr)
-  '    MsgBox(tmpStr, vbOKOnly, "Error")
-  '  ElseIf e.Error IsNot Nothing Then
-  '    tmpStr = "Mail failed to send:" + e.Error.Message
-  '    addMsg(tmpStr)
-  '    MsgBox(tmpStr, vbOKOnly, "SMTP Error")
-  '  Else
-  '    tmpStr = "Mail Sent"
-  '    addMsg(tmpStr)
-  '    MsgBox(tmpStr, vbOKOnly, "Mail Status")
-  '  End If
-  'End Sub
+    '    addMsg("Set SMTP")
+    '    smtpServer.Port = 587
+    '    smtpServer.Host = "smtp.dreamhost.com"
 
-  '----------------------------------------------------------------------------
+    '    addMsg("Set callback")
+    '    AddHandler smtpServer.SendCompleted, AddressOf sendCompleted
+    '    addMsg("Sending...")
 
+    '    smtpServer.SendAsync(newMsg, userState)
 
-  Private Sub lbxUniqueBuffer_DoubleClick(sender As Object, e As EventArgs)
-    addMsg("lbxUniqueBuffer.DoubleClick")
-    setCBDataFromSC(sRankedCollection, sender.SelectedIndex)
-  End Sub
+    '    addMsg("Msg sent asynchronosly")
+
+    '  Catch ex As Exception
+    '    Console.ForegroundColor = ConsoleColor.Red
+    '    addMsg("Class -> ClassStorage, Method -> MyContactByMail, Error -> " & ex.Message)
+    '    Console.WriteLine("Class -> ClassStorage, Method -> MyContactByMail, Error -> " & ex.Message)
+    '  End Try
+
+    '  addMsg("d")
+
+    'End Sub
 
 
+    ''----------------------------------------------------------------------------
+    'Private Sub sendCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+    '  Dim tmpStr As String
+    '  If e.Cancelled Then
+    '    tmpStr = "Mail send was cancelled"
+    '    addMsg(tmpStr)
+    '    MsgBox(tmpStr, vbOKOnly, "Error")
+    '  ElseIf e.Error IsNot Nothing Then
+    '    tmpStr = "Mail failed to send:" + e.Error.Message
+    '    addMsg(tmpStr)
+    '    MsgBox(tmpStr, vbOKOnly, "SMTP Error")
+    '  Else
+    '    tmpStr = "Mail Sent"
+    '    addMsg(tmpStr)
+    '    MsgBox(tmpStr, vbOKOnly, "Mail Status")
+    '  End If
+    'End Sub
 
-  Private Sub lbxFavorites_DoubleClick(sender As Object, e As EventArgs) Handles lbxFavorites.DoubleClick
+    '----------------------------------------------------------------------------
+
+
+    Private Sub lbxFavorites_DoubleClick(sender As Object, e As EventArgs) Handles lbxFavorites.DoubleClick
     addMsg("lbxFavorites.DoubleClick")
     setCBDataFromSC(sFavoriteCollection, sender.SelectedIndex)
   End Sub
 
 
-  '----------------------------------------------------------------------------
-  Private Sub lbxRecent_MouseHover(sender As Object, e As EventArgs)
-    ToolTip1.SetToolTip(lbxRecent, currentCB)
-  End Sub
+    '----------------------------------------------------------------------------
+    Private Sub lbxRecent_MouseHover(sender As Object, e As EventArgs)
+        ToolTip1.SetToolTip(lbxRecent, currentCB)
+    End Sub
 
 
-  '----------------------------------------------------------------------------
-  Private Sub tstbClipboard_MouseHover(sender As Object, e As EventArgs)
+    '----------------------------------------------------------------------------
+    Private Sub tstbClipboard_MouseHover(sender As Object, e As EventArgs)
     'ToolTip1.SetToolTip(tstbClipboard, currentCB)
     tstbClipboard.ToolTipText = currentCB
   End Sub
@@ -813,17 +854,51 @@ Public Class Form1
 
   End Sub
 
-  Private Sub lbxRecent_DoubleClick(sender As Object, e As EventArgs) Handles lbxRecent.DoubleClick
-    addMsg("DoubleClick")
-    setCBDataFromSC(sRecentCollection, sender.SelectedIndex)
-  End Sub
+    Private Sub lbxRecent_DoubleClick(sender As Object, e As EventArgs) Handles lbxRecent.DoubleClick
+        addMsg("DoubleClick")
+        setCBDataFromSC(sRecentCollection, sender.SelectedIndex)
+    End Sub
 
-  Private Sub tsmiSortAToZ1_Click(sender As Object, e As EventArgs) Handles tsmiSortAToZ1.Click
-    favoriteSort(False)
-  End Sub
+    Private Sub tsmiSortAToZ1_Click(sender As Object, e As EventArgs) Handles tsmiSortAToZ1.Click
+        favoriteSort(False)
+    End Sub
 
-  Private Sub tsmiSortZToA1_Click(sender As Object, e As EventArgs) Handles tsmiSortZToA1.Click
-    favoriteSort(True)
+    Private Sub tsmiSortZToA1_Click(sender As Object, e As EventArgs) Handles tsmiSortZToA1.Click
+        favoriteSort(True)
 
-  End Sub
+    End Sub
+
+    Private Sub cmsRecentMenu_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmsRecentMenu.Opening
+
+    End Sub
+
+    Private Sub cmsFavorites_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmsFavorites.Opening
+
+    End Sub
+
+    Private Sub tsbtRecentFind_Click(sender As Object, e As EventArgs) Handles tsbtRecentFind.Click
+        find()
+
+    End Sub
+
+    Private Sub tstbRecentFind_Click(sender As Object, e As EventArgs) Handles tstbRecentFind.Click
+        tstbRecentFind.Text = ""
+    End Sub
+
+    Private Sub tstbRecentFind_KeyDown(sender As Object, e As KeyEventArgs) Handles tstbRecentFind.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            find()
+        End If
+    End Sub
+
+    Private Sub tsbtRecentCase_Click(sender As Object, e As EventArgs) Handles tsbtRecentCase.Click
+        If tsbtRecentCase.Checked Or tsbtRecentWhole.Checked Then
+            _searchOption = SearchType.SRCH_EXACT
+        Else
+
+            _searchOption = SearchType.SRCH_NOM
+        End If
+
+
+    End Sub
 End Class
