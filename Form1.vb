@@ -293,13 +293,13 @@ Public Class Form1
   '----------------------------------------------------------------------------
   Private Sub updateGui()
 
-    'tsslCmd.Text = Strings.Left(currentCB, 64)
+        'tsslCmd.Text = Strings.Left(currentCB, 64)
 
-    tstbClipboard.Text = Strings.Left(currentCB, 64)
+        tbxClipboard.Text = Strings.Left(currentCB, 64)
 
 
 
-    tsslCopyCount.Text = "Copy Count:" & copyCount
+        tsslCopyCount.Text = "Copy Count:" & copyCount
     tsslCOCout.Text = "CO Count:" & coUnique.Count
     tsslCount.Text = iCount
     tbxMaxItemSize.Text = My.Settings.maxBufferItemSize
@@ -558,8 +558,8 @@ Public Class Form1
   Private Sub clearClipboard()
     addMsg("Clear Clipboard")
     My.Computer.Clipboard.Clear()
-    tstbClipboard.Text = "<empty>"
-    tsslCmd.Text = "Clear Clipboard"
+        tbxClipboard.Text = "<empty>"
+        tsslCmd.Text = "Clear Clipboard"
     addMsg("d")
   End Sub
 
@@ -663,15 +663,15 @@ Public Class Form1
 
 
     '----------------------------------------------------------------------------
-    Private Sub tstbClipboard_MouseHover(sender As Object, e As EventArgs)
-    'ToolTip1.SetToolTip(tstbClipboard, currentCB)
-    tstbClipboard.ToolTipText = currentCB
-  End Sub
+    Private Sub tbxClipboard_MouseHover(sender As Object, e As EventArgs)
+        'ToolTip1.SetToolTip(tbxClipboard, currentCB)
+        'tbxClipboard.ToolTipText = currentCB
+    End Sub
 
 
 
-  '----------------------------------------------------------------------------
-  Private Sub tsmiCopyToFav_Click(sender As Object, e As EventArgs) Handles tsmiCopyToFav.Click
+    '----------------------------------------------------------------------------
+    Private Sub tsmiCopyToFav_Click(sender As Object, e As EventArgs) Handles tsmiCopyToFav.Click
     Dim idx As Integer = lbxRecent.SelectedIndex
     If idx >= 0 Then
       addMsg("Selected Index:" & idx)
@@ -742,7 +742,8 @@ Public Class Form1
     End If
   End Sub
 
-  Private Sub tsmiMoveToTop_Click(sender As Object, e As EventArgs) Handles tsmiMoveToTop.Click
+    '----------------------------------------------------------------------------
+    Private Sub tsmiMoveToTop_Click(sender As Object, e As EventArgs) Handles tsmiMoveToTop.Click
     Dim idx = lbxFavorites.SelectedIndex
     Dim tmpStr As String = ""
     If (idx > 0 And sFavoriteCollection.Count > 0) Then
@@ -764,7 +765,8 @@ Public Class Form1
     End If
   End Sub
 
-  Private Sub GoToTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsmiGoToTop.Click
+  '----------------------------------------------------------------------------
+    Private Sub GoToTopToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles tsmiGoToTop.Click
     lbxRecent.SelectedIndex = 0
   End Sub
 
@@ -794,24 +796,15 @@ Public Class Form1
     End If
   End Sub
 
-  Private Sub tsmiRemoveBuff_Click(sender As Object, e As EventArgs) Handles tsmiRemoveBuff.Click
-    Dim idx = lbxRecent.SelectedIndex
-    If idx >= 0 Then
-      sRecentCollection.RemoveAt(idx)
-      updateGui()
-    End If
-  End Sub
+    Private Sub tsmiRemoveBuff_Click(sender As Object, e As EventArgs) Handles tsmiRemoveBuff.Click
+        Dim idx = lbxRecent.SelectedIndex
+        If idx >= 0 Then
+            sRecentCollection.RemoveAt(idx)
+            updateGui()
+        End If
+    End Sub
 
-  Private Sub tsbtClearBuffer_Click(sender As Object, e As EventArgs) Handles tsbtClearBuffer.Click
-    clearBuffer()
-  End Sub
-
-  Private Sub tsbtClearCB_Click(sender As Object, e As EventArgs) Handles tsbtClearCB.Click
-    clearClipboard()
-  End Sub
-
-
-  Private Sub btnTestSound_Click(sender As Object, e As EventArgs) Handles btnTestSound.Click
+    Private Sub btnTestSound_Click(sender As Object, e As EventArgs) Handles btnTestSound.Click
     playSound(My.Settings.copyAlertSoundFile)
   End Sub
 
@@ -833,13 +826,13 @@ Public Class Form1
     Process.Start("explorer.exe", My.Settings.soundFolder)
   End Sub
 
-  Private Sub tstbClipboard_DoubleClick(sender As Object, e As EventArgs) Handles tstbClipboard.DoubleClick
-    addMsg("lbxRecent.DoubleClick")
-    setCBDataFromSC(sFavoriteCollection, sender.SelectedIndex)
-    setCBData(tstbClipboard.Text)
-  End Sub
+    Private Sub tbxClipboard_DoubleClick(sender As Object, e As EventArgs) Handles tbxClipboard.DoubleClick
+        addMsg("lbxRecent.DoubleClick")
+        'setCBDataFromSC(sFavoriteCollection, sender.SelectedIndex)
+        setCBData(tbxClipboard.Text)
+    End Sub
 
-  Private Sub tsbtClearConsole_Click(sender As Object, e As EventArgs)
+    Private Sub tsbtClearConsole_Click(sender As Object, e As EventArgs)
     addMsg("tsbtClearConsole.Click")
   End Sub
 
@@ -868,14 +861,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub cmsRecentMenu_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmsRecentMenu.Opening
-
-    End Sub
-
-    Private Sub cmsFavorites_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles cmsFavorites.Opening
-
-    End Sub
-
     Private Sub tsbtRecentFind_Click(sender As Object, e As EventArgs) Handles tsbtRecentFind.Click
         find()
 
@@ -900,5 +885,15 @@ Public Class Form1
         End If
 
 
+    End Sub
+
+    Private Sub tbxClipboard_KeyDown(sender As Object, e As KeyEventArgs) Handles tbxClipboard.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            setCBData(tbxClipboard.Text)
+        End If
+    End Sub
+
+    Private Sub CopyToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles CopyToolStripMenuItem.Click
+        setCBData(tbxClipboard.Text)
     End Sub
 End Class
