@@ -369,6 +369,19 @@ Public Class Form1
 
     End Sub
 
+    '----------------------------------------------------------------------------
+    Private Sub pushFavoriteLis(nItem As String)
+        sCBLock = True
+        currentCB = nItem
+
+        If currentCB <> "" Then
+            addMsg("Insert item into favorites")
+            pushFavoriteList()
+
+        End If
+        updateGui()
+    End Sub
+
 
     '----------------------------------------------------------------------------
     Private Sub pushFavoriteList()
@@ -673,16 +686,20 @@ Public Class Form1
         If idx >= 0 Then
             addMsg("Selected Index:" & idx)
 
-            sCBLock = True
-            addMsg("Get clipboard buffer item data")
-            currentCB = lbxRecent.Items(idx)
+            pushFavoriteLis(lbxRecent.Items(idx))
 
-            If currentCB <> "" Then
-                addMsg("Insert item into favorites")
-                pushFavoriteList()
+            'sCBLock = True
+            'addMsg("Get clipboard buffer item data")
 
-            End If
-            updateGui()
+
+            'currentCB = lbxRecent.Items(idx)
+
+            'If currentCB <> "" Then
+            '    addMsg("Insert item into favorites")
+            '    pushFavoriteList()
+
+            'End If
+            'updateGui()
         Else
             addMsg("Invalid index")
 
@@ -703,14 +720,12 @@ Public Class Form1
         If (idx >= 0) Then
 
             If (idx > 0 And sFavoriteCollection.Count > idx) Then
-
-
                 Dim tmpStr = sFavoriteCollection.Item(idx)
                 sFavoriteCollection.Item(idx) = sFavoriteCollection.Item(idx - 1)
                 sFavoriteCollection.Item(idx - 1) = tmpStr
+                lbxFavorites.SelectedIndex -= 1
                 updateGui()
                 addMsg("Move Fav Up")
-
 
             End If
         Else
@@ -727,10 +742,10 @@ Public Class Form1
 
             If (idx < (sFavoriteCollection.Count - 1) And sFavoriteCollection.Count > 1) Then
 
-
                 Dim tmpStr = sFavoriteCollection.Item(idx)
                 sFavoriteCollection.Item(idx) = sFavoriteCollection.Item(idx + 1)
                 sFavoriteCollection.Item(idx + 1) = tmpStr
+                lbxFavorites.SelectedIndex += 1
                 updateGui()
 
             End If
@@ -893,4 +908,14 @@ Public Class Form1
     Private Sub CopyToolStripMenuItem_Click_1(sender As Object, e As EventArgs) Handles CopyToolStripMenuItem.Click
         setCBData(tbxClipboard.Text)
     End Sub
+
+    Private Sub CopyToFavoritesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyToFavoritesToolStripMenuItem.Click
+        pushFavoriteLis(tbxClipboard.Text)
+        setCBData(tbxClipboard.Text)
+    End Sub
+
+    Private Sub lbxFavorites_MouseHover(sender As Object, e As EventArgs) Handles lbxFavorites.MouseHover
+        ToolTip1.SetToolTip(lbxFavorites, lbxFavorites.SelectedIndex)
+    End Sub
+
 End Class
