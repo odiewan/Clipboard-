@@ -667,7 +667,7 @@ Partial Class Form1
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MinimumSize = New System.Drawing.Size(334, 373)
         Me.Name = "Form1"
-        Me.Text = "Clipboard++ 20220422"
+        Me.Text = "Clipboard++ 20220430"
         Me.cmsFavorites.ResumeLayout(False)
         CType(Me.Form1BindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.cmsRecentMenu.ResumeLayout(False)
