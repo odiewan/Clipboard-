@@ -114,48 +114,48 @@ Partial Class Form1
         Me.cmsFavorites.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.cmsFavorites.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiMoveUp, Me.tsmiMoveDown, Me.tsmiMoveToTop, Me.tsmiRemoveFav, Me.tsmiSortAToZ1, Me.tsmiSortZToA1, Me.FindToolStripMenuItem})
         Me.cmsFavorites.Name = "cmsFavorites"
-        Me.cmsFavorites.Size = New System.Drawing.Size(231, 172)
+        Me.cmsFavorites.Size = New System.Drawing.Size(197, 158)
         '
         'tsmiMoveUp
         '
         Me.tsmiMoveUp.Name = "tsmiMoveUp"
-        Me.tsmiMoveUp.Size = New System.Drawing.Size(230, 24)
+        Me.tsmiMoveUp.Size = New System.Drawing.Size(196, 22)
         Me.tsmiMoveUp.Text = "Move Up"
         '
         'tsmiMoveDown
         '
         Me.tsmiMoveDown.Name = "tsmiMoveDown"
-        Me.tsmiMoveDown.Size = New System.Drawing.Size(230, 24)
+        Me.tsmiMoveDown.Size = New System.Drawing.Size(196, 22)
         Me.tsmiMoveDown.Text = "Move Down"
         '
         'tsmiMoveToTop
         '
         Me.tsmiMoveToTop.Name = "tsmiMoveToTop"
-        Me.tsmiMoveToTop.Size = New System.Drawing.Size(230, 24)
+        Me.tsmiMoveToTop.Size = New System.Drawing.Size(196, 22)
         Me.tsmiMoveToTop.Text = "Move to Top"
         '
         'tsmiRemoveFav
         '
         Me.tsmiRemoveFav.Name = "tsmiRemoveFav"
-        Me.tsmiRemoveFav.Size = New System.Drawing.Size(230, 24)
+        Me.tsmiRemoveFav.Size = New System.Drawing.Size(196, 22)
         Me.tsmiRemoveFav.Text = "Remove from Favorites"
         '
         'tsmiSortAToZ1
         '
         Me.tsmiSortAToZ1.Name = "tsmiSortAToZ1"
-        Me.tsmiSortAToZ1.Size = New System.Drawing.Size(230, 24)
+        Me.tsmiSortAToZ1.Size = New System.Drawing.Size(196, 22)
         Me.tsmiSortAToZ1.Text = "Sort Favorites A to Z"
         '
         'tsmiSortZToA1
         '
         Me.tsmiSortZToA1.Name = "tsmiSortZToA1"
-        Me.tsmiSortZToA1.Size = New System.Drawing.Size(230, 24)
+        Me.tsmiSortZToA1.Size = New System.Drawing.Size(196, 22)
         Me.tsmiSortZToA1.Text = "Sort Favorites Z to A"
         '
         'FindToolStripMenuItem
         '
         Me.FindToolStripMenuItem.Name = "FindToolStripMenuItem"
-        Me.FindToolStripMenuItem.Size = New System.Drawing.Size(230, 24)
+        Me.FindToolStripMenuItem.Size = New System.Drawing.Size(196, 22)
         Me.FindToolStripMenuItem.Text = "Find..."
         '
         'cmsRecentMenu
@@ -163,54 +163,54 @@ Partial Class Form1
         Me.cmsRecentMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.cmsRecentMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiCopyToFav, Me.tsmiRemoveBuff, Me.tsmiGoToTop, Me.tsmiGoToBottom, Me.tsmiCopy, Me.tsmiSortAToZ, Me.tsmiSortZToA, Me.FindToolStripMenuItem1})
         Me.cmsRecentMenu.Name = "cmsBufferMenu"
-        Me.cmsRecentMenu.Size = New System.Drawing.Size(187, 196)
+        Me.cmsRecentMenu.Size = New System.Drawing.Size(161, 180)
         '
         'tsmiCopyToFav
         '
         Me.tsmiCopyToFav.Name = "tsmiCopyToFav"
-        Me.tsmiCopyToFav.Size = New System.Drawing.Size(186, 24)
+        Me.tsmiCopyToFav.Size = New System.Drawing.Size(160, 22)
         Me.tsmiCopyToFav.Text = "Add to Favorites"
         '
         'tsmiRemoveBuff
         '
         Me.tsmiRemoveBuff.Name = "tsmiRemoveBuff"
-        Me.tsmiRemoveBuff.Size = New System.Drawing.Size(186, 24)
+        Me.tsmiRemoveBuff.Size = New System.Drawing.Size(160, 22)
         Me.tsmiRemoveBuff.Text = "Delete"
         '
         'tsmiGoToTop
         '
         Me.tsmiGoToTop.Name = "tsmiGoToTop"
-        Me.tsmiGoToTop.Size = New System.Drawing.Size(186, 24)
+        Me.tsmiGoToTop.Size = New System.Drawing.Size(160, 22)
         Me.tsmiGoToTop.Text = "Go to Top"
         '
         'tsmiGoToBottom
         '
         Me.tsmiGoToBottom.Name = "tsmiGoToBottom"
-        Me.tsmiGoToBottom.Size = New System.Drawing.Size(186, 24)
+        Me.tsmiGoToBottom.Size = New System.Drawing.Size(160, 22)
         Me.tsmiGoToBottom.Text = "Go to Bottom"
         '
         'tsmiCopy
         '
         Me.tsmiCopy.Name = "tsmiCopy"
-        Me.tsmiCopy.Size = New System.Drawing.Size(186, 24)
+        Me.tsmiCopy.Size = New System.Drawing.Size(160, 22)
         Me.tsmiCopy.Text = "Copy"
         '
         'tsmiSortAToZ
         '
         Me.tsmiSortAToZ.Name = "tsmiSortAToZ"
-        Me.tsmiSortAToZ.Size = New System.Drawing.Size(186, 24)
+        Me.tsmiSortAToZ.Size = New System.Drawing.Size(160, 22)
         Me.tsmiSortAToZ.Text = "Sort A to Z"
         '
         'tsmiSortZToA
         '
         Me.tsmiSortZToA.Name = "tsmiSortZToA"
-        Me.tsmiSortZToA.Size = New System.Drawing.Size(186, 24)
+        Me.tsmiSortZToA.Size = New System.Drawing.Size(160, 22)
         Me.tsmiSortZToA.Text = "Sort Z to A"
         '
         'FindToolStripMenuItem1
         '
         Me.FindToolStripMenuItem1.Name = "FindToolStripMenuItem1"
-        Me.FindToolStripMenuItem1.Size = New System.Drawing.Size(186, 24)
+        Me.FindToolStripMenuItem1.Size = New System.Drawing.Size(160, 22)
         Me.FindToolStripMenuItem1.Text = "Find..."
         '
         'Timer1
@@ -225,69 +225,68 @@ Partial Class Form1
         '
         Me.ssMain.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ssMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsslStatus, Me.tsslCount, Me.tsslCmd, Me.tsslCopyCount, Me.tsslCOCout, Me.tsslPollStat, Me.ToolStripStatusLabel1, Me.tspbProg})
-        Me.ssMain.Location = New System.Drawing.Point(0, 385)
+        Me.ssMain.Location = New System.Drawing.Point(0, 312)
         Me.ssMain.Name = "ssMain"
-        Me.ssMain.Padding = New System.Windows.Forms.Padding(1, 0, 13, 0)
-        Me.ssMain.Size = New System.Drawing.Size(424, 26)
+        Me.ssMain.Padding = New System.Windows.Forms.Padding(1, 0, 10, 0)
+        Me.ssMain.Size = New System.Drawing.Size(318, 22)
         Me.ssMain.TabIndex = 4
         Me.ssMain.Text = "StatusStrip1"
         '
         'tsslStatus
         '
         Me.tsslStatus.Name = "tsslStatus"
-        Me.tsslStatus.Size = New System.Drawing.Size(50, 20)
+        Me.tsslStatus.Size = New System.Drawing.Size(39, 17)
         Me.tsslStatus.Text = "Ready"
         '
         'tsslCount
         '
         Me.tsslCount.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
         Me.tsslCount.Name = "tsslCount"
-        Me.tsslCount.Size = New System.Drawing.Size(27, 20)
+        Me.tsslCount.Size = New System.Drawing.Size(21, 17)
         Me.tsslCount.Text = "##"
         '
         'tsslCmd
         '
         Me.tsslCmd.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenInner
         Me.tsslCmd.Name = "tsslCmd"
-        Me.tsslCmd.Size = New System.Drawing.Size(40, 20)
+        Me.tsslCmd.Size = New System.Drawing.Size(33, 17)
         Me.tsslCmd.Text = "Cmd"
         '
         'tsslCopyCount
         '
         Me.tsslCopyCount.Name = "tsslCopyCount"
-        Me.tsslCopyCount.Size = New System.Drawing.Size(86, 20)
+        Me.tsslCopyCount.Size = New System.Drawing.Size(71, 17)
         Me.tsslCopyCount.Text = "Copy Count"
         '
         'tsslCOCout
         '
         Me.tsslCOCout.Name = "tsslCOCout"
-        Me.tsslCOCout.Size = New System.Drawing.Size(75, 20)
+        Me.tsslCOCout.Size = New System.Drawing.Size(63, 17)
         Me.tsslCOCout.Text = "CO Count:"
         '
         'tsslPollStat
         '
         Me.tsslPollStat.Name = "tsslPollStat"
-        Me.tsslPollStat.Size = New System.Drawing.Size(73, 20)
+        Me.tsslPollStat.Size = New System.Drawing.Size(60, 17)
         Me.tsslPollStat.Text = "Polling: --"
         Me.tsslPollStat.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay
         '
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(153, 20)
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(119, 17)
         Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
         '
         'tspbProg
         '
         Me.tspbProg.Name = "tspbProg"
-        Me.tspbProg.Size = New System.Drawing.Size(133, 17)
+        Me.tspbProg.Size = New System.Drawing.Size(100, 14)
         '
         'btnBrowseAudioFolder
         '
-        Me.btnBrowseAudioFolder.Location = New System.Drawing.Point(353, 149)
-        Me.btnBrowseAudioFolder.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnBrowseAudioFolder.Location = New System.Drawing.Point(265, 121)
         Me.btnBrowseAudioFolder.Name = "btnBrowseAudioFolder"
-        Me.btnBrowseAudioFolder.Size = New System.Drawing.Size(35, 28)
+        Me.btnBrowseAudioFolder.Size = New System.Drawing.Size(26, 23)
         Me.btnBrowseAudioFolder.TabIndex = 11
         Me.btnBrowseAudioFolder.Text = "..."
         Me.ToolTip1.SetToolTip(Me.btnBrowseAudioFolder, "Browse For Sound Folder")
@@ -297,10 +296,9 @@ Partial Class Form1
         '
         Me.btnTestSound.ImageIndex = 0
         Me.btnTestSound.ImageList = Me.ImageList1
-        Me.btnTestSound.Location = New System.Drawing.Point(348, 117)
-        Me.btnTestSound.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnTestSound.Location = New System.Drawing.Point(261, 95)
         Me.btnTestSound.Name = "btnTestSound"
-        Me.btnTestSound.Size = New System.Drawing.Size(35, 28)
+        Me.btnTestSound.Size = New System.Drawing.Size(26, 23)
         Me.btnTestSound.TabIndex = 10
         Me.ToolTip1.SetToolTip(Me.btnTestSound, "Play Sound File")
         Me.btnTestSound.UseVisualStyleBackColor = True
@@ -314,10 +312,9 @@ Partial Class Form1
         'btnPickSoundFile
         '
         Me.btnPickSoundFile.Image = Global.Clipboard_Test_Prj.My.Resources.Resources.Folder_action_open
-        Me.btnPickSoundFile.Location = New System.Drawing.Point(304, 117)
-        Me.btnPickSoundFile.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnPickSoundFile.Location = New System.Drawing.Point(228, 95)
         Me.btnPickSoundFile.Name = "btnPickSoundFile"
-        Me.btnPickSoundFile.Size = New System.Drawing.Size(36, 28)
+        Me.btnPickSoundFile.Size = New System.Drawing.Size(27, 23)
         Me.btnPickSoundFile.TabIndex = 12
         Me.ToolTip1.SetToolTip(Me.btnPickSoundFile, "Select Sound File")
         Me.btnPickSoundFile.UseVisualStyleBackColor = True
@@ -330,12 +327,10 @@ Partial Class Form1
         Me.lbxFavorites.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lbxFavorites.ForeColor = System.Drawing.SystemColors.ScrollBar
         Me.lbxFavorites.FormattingEnabled = True
-        Me.lbxFavorites.ItemHeight = 16
-        Me.lbxFavorites.Location = New System.Drawing.Point(4, 4)
-        Me.lbxFavorites.Margin = New System.Windows.Forms.Padding(4)
+        Me.lbxFavorites.Location = New System.Drawing.Point(3, 3)
         Me.lbxFavorites.Name = "lbxFavorites"
         Me.lbxFavorites.ScrollAlwaysVisible = True
-        Me.lbxFavorites.Size = New System.Drawing.Size(402, 264)
+        Me.lbxFavorites.Size = New System.Drawing.Size(300, 207)
         Me.lbxFavorites.TabIndex = 11
         Me.ToolTip1.SetToolTip(Me.lbxFavorites, "lbxFav")
         '
@@ -350,11 +345,9 @@ Partial Class Form1
         Me.gbxClipboard.Controls.Add(Me.tbxClipboard)
         Me.gbxClipboard.Dock = System.Windows.Forms.DockStyle.Top
         Me.gbxClipboard.Location = New System.Drawing.Point(0, 0)
-        Me.gbxClipboard.Margin = New System.Windows.Forms.Padding(4)
-        Me.gbxClipboard.MinimumSize = New System.Drawing.Size(0, 37)
+        Me.gbxClipboard.MinimumSize = New System.Drawing.Size(0, 30)
         Me.gbxClipboard.Name = "gbxClipboard"
-        Me.gbxClipboard.Padding = New System.Windows.Forms.Padding(4)
-        Me.gbxClipboard.Size = New System.Drawing.Size(424, 65)
+        Me.gbxClipboard.Size = New System.Drawing.Size(318, 56)
         Me.gbxClipboard.TabIndex = 13
         Me.gbxClipboard.TabStop = False
         Me.gbxClipboard.Text = "Current Clipboard"
@@ -364,10 +357,10 @@ Partial Class Form1
         Me.tbxClipboard.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tbxClipboard.ContextMenuStrip = Me.cmmsClipboard
-        Me.tbxClipboard.Location = New System.Drawing.Point(7, 22)
-        Me.tbxClipboard.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tbxClipboard.Location = New System.Drawing.Point(5, 18)
+        Me.tbxClipboard.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.tbxClipboard.Name = "tbxClipboard"
-        Me.tbxClipboard.Size = New System.Drawing.Size(405, 22)
+        Me.tbxClipboard.Size = New System.Drawing.Size(305, 20)
         Me.tbxClipboard.TabIndex = 14
         '
         'cmmsClipboard
@@ -375,29 +368,28 @@ Partial Class Form1
         Me.cmmsClipboard.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.cmmsClipboard.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyToolStripMenuItem, Me.CopyToFavoritesToolStripMenuItem})
         Me.cmmsClipboard.Name = "cmmsClipboard"
-        Me.cmmsClipboard.Size = New System.Drawing.Size(193, 52)
+        Me.cmmsClipboard.Size = New System.Drawing.Size(167, 48)
         '
         'CopyToolStripMenuItem
         '
         Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(192, 24)
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.CopyToolStripMenuItem.Text = "Copy"
         '
         'CopyToFavoritesToolStripMenuItem
         '
         Me.CopyToFavoritesToolStripMenuItem.Name = "CopyToFavoritesToolStripMenuItem"
-        Me.CopyToFavoritesToolStripMenuItem.Size = New System.Drawing.Size(192, 24)
+        Me.CopyToFavoritesToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.CopyToFavoritesToolStripMenuItem.Text = "Copy to Favorites"
         '
         'gbHistory
         '
         Me.gbHistory.Controls.Add(Me.tbctrlMain)
         Me.gbHistory.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbHistory.Location = New System.Drawing.Point(0, 65)
-        Me.gbHistory.Margin = New System.Windows.Forms.Padding(4)
+        Me.gbHistory.Location = New System.Drawing.Point(0, 56)
         Me.gbHistory.Name = "gbHistory"
-        Me.gbHistory.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.gbHistory.Size = New System.Drawing.Size(424, 320)
+        Me.gbHistory.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.gbHistory.Size = New System.Drawing.Size(318, 256)
         Me.gbHistory.TabIndex = 0
         Me.gbHistory.TabStop = False
         Me.gbHistory.Text = "Clipboard History"
@@ -409,21 +401,20 @@ Partial Class Form1
         Me.tbctrlMain.Controls.Add(Me.tbpRecent)
         Me.tbctrlMain.Controls.Add(Me.tpSettings)
         Me.tbctrlMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tbctrlMain.Location = New System.Drawing.Point(3, 17)
-        Me.tbctrlMain.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tbctrlMain.Location = New System.Drawing.Point(2, 15)
+        Me.tbctrlMain.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.tbctrlMain.Name = "tbctrlMain"
         Me.tbctrlMain.SelectedIndex = 0
-        Me.tbctrlMain.Size = New System.Drawing.Size(418, 301)
+        Me.tbctrlMain.Size = New System.Drawing.Size(314, 239)
         Me.tbctrlMain.TabIndex = 7
         '
         'tpFavorites
         '
         Me.tpFavorites.Controls.Add(Me.lbxFavorites)
-        Me.tpFavorites.Location = New System.Drawing.Point(4, 25)
-        Me.tpFavorites.Margin = New System.Windows.Forms.Padding(4)
+        Me.tpFavorites.Location = New System.Drawing.Point(4, 22)
         Me.tpFavorites.Name = "tpFavorites"
-        Me.tpFavorites.Padding = New System.Windows.Forms.Padding(4)
-        Me.tpFavorites.Size = New System.Drawing.Size(410, 272)
+        Me.tpFavorites.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.tpFavorites.Size = New System.Drawing.Size(306, 213)
         Me.tpFavorites.TabIndex = 5
         Me.tpFavorites.Text = "Favorites"
         Me.tpFavorites.UseVisualStyleBackColor = True
@@ -432,11 +423,11 @@ Partial Class Form1
         '
         Me.tbpRecent.Controls.Add(Me.lbxRecent)
         Me.tbpRecent.Controls.Add(Me.ToolStrip1)
-        Me.tbpRecent.Location = New System.Drawing.Point(4, 25)
-        Me.tbpRecent.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tbpRecent.Location = New System.Drawing.Point(4, 22)
+        Me.tbpRecent.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.tbpRecent.Name = "tbpRecent"
-        Me.tbpRecent.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.tbpRecent.Size = New System.Drawing.Size(410, 272)
+        Me.tbpRecent.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.tbpRecent.Size = New System.Drawing.Size(306, 219)
         Me.tbpRecent.TabIndex = 0
         Me.tbpRecent.Text = "Recent"
         Me.tbpRecent.UseVisualStyleBackColor = True
@@ -447,21 +438,20 @@ Partial Class Form1
         Me.lbxRecent.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lbxRecent.FormattingEnabled = True
         Me.lbxRecent.HorizontalScrollbar = True
-        Me.lbxRecent.ItemHeight = 16
-        Me.lbxRecent.Location = New System.Drawing.Point(3, 29)
-        Me.lbxRecent.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.lbxRecent.Location = New System.Drawing.Point(2, 29)
+        Me.lbxRecent.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.lbxRecent.Name = "lbxRecent"
         Me.lbxRecent.ScrollAlwaysVisible = True
-        Me.lbxRecent.Size = New System.Drawing.Size(404, 241)
+        Me.lbxRecent.Size = New System.Drawing.Size(302, 188)
         Me.lbxRecent.TabIndex = 8
         '
         'ToolStrip1
         '
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tstbRecentFind, Me.tsbtRecentFind, Me.tsbtRecentCase, Me.tsbtRecentWhole, Me.tsslResult})
-        Me.ToolStrip1.Location = New System.Drawing.Point(3, 2)
+        Me.ToolStrip1.Location = New System.Drawing.Point(2, 2)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(404, 27)
+        Me.ToolStrip1.Size = New System.Drawing.Size(302, 27)
         Me.ToolStrip1.TabIndex = 7
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -469,7 +459,7 @@ Partial Class Form1
         '
         Me.tstbRecentFind.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.tstbRecentFind.Name = "tstbRecentFind"
-        Me.tstbRecentFind.Size = New System.Drawing.Size(132, 27)
+        Me.tstbRecentFind.Size = New System.Drawing.Size(100, 27)
         Me.tstbRecentFind.Text = "Search recent..."
         '
         'tsbtRecentFind
@@ -478,7 +468,7 @@ Partial Class Form1
         Me.tsbtRecentFind.Image = CType(resources.GetObject("tsbtRecentFind.Image"), System.Drawing.Image)
         Me.tsbtRecentFind.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtRecentFind.Name = "tsbtRecentFind"
-        Me.tsbtRecentFind.Size = New System.Drawing.Size(29, 24)
+        Me.tsbtRecentFind.Size = New System.Drawing.Size(24, 24)
         Me.tsbtRecentFind.Text = "ToolStripButton1"
         '
         'tsbtRecentCase
@@ -488,7 +478,7 @@ Partial Class Form1
         Me.tsbtRecentCase.Image = CType(resources.GetObject("tsbtRecentCase.Image"), System.Drawing.Image)
         Me.tsbtRecentCase.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtRecentCase.Name = "tsbtRecentCase"
-        Me.tsbtRecentCase.Size = New System.Drawing.Size(29, 24)
+        Me.tsbtRecentCase.Size = New System.Drawing.Size(24, 24)
         Me.tsbtRecentCase.Text = "ToolStripButton2"
         '
         'tsbtRecentWhole
@@ -498,24 +488,23 @@ Partial Class Form1
         Me.tsbtRecentWhole.Image = CType(resources.GetObject("tsbtRecentWhole.Image"), System.Drawing.Image)
         Me.tsbtRecentWhole.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtRecentWhole.Name = "tsbtRecentWhole"
-        Me.tsbtRecentWhole.Size = New System.Drawing.Size(40, 24)
+        Me.tsbtRecentWhole.Size = New System.Drawing.Size(32, 24)
         Me.tsbtRecentWhole.Text = "[ab]"
         Me.tsbtRecentWhole.ToolTipText = "Find whole word" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'tsslResult
         '
         Me.tsslResult.Name = "tsslResult"
-        Me.tsslResult.Size = New System.Drawing.Size(84, 24)
+        Me.tsslResult.Size = New System.Drawing.Size(68, 24)
         Me.tsslResult.Text = "Find Result:"
         '
         'tpSettings
         '
         Me.tpSettings.Controls.Add(Me.gbSettings1)
-        Me.tpSettings.Location = New System.Drawing.Point(4, 25)
-        Me.tpSettings.Margin = New System.Windows.Forms.Padding(4)
+        Me.tpSettings.Location = New System.Drawing.Point(4, 22)
         Me.tpSettings.Name = "tpSettings"
-        Me.tpSettings.Padding = New System.Windows.Forms.Padding(4)
-        Me.tpSettings.Size = New System.Drawing.Size(410, 272)
+        Me.tpSettings.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.tpSettings.Size = New System.Drawing.Size(306, 219)
         Me.tpSettings.TabIndex = 4
         Me.tpSettings.Text = "Settings"
         Me.tpSettings.UseVisualStyleBackColor = True
@@ -537,21 +526,18 @@ Partial Class Form1
         Me.gbSettings1.Controls.Add(Me.Label1)
         Me.gbSettings1.Controls.Add(Me.tbxMaxItemSize)
         Me.gbSettings1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.gbSettings1.Location = New System.Drawing.Point(4, 4)
-        Me.gbSettings1.Margin = New System.Windows.Forms.Padding(4)
+        Me.gbSettings1.Location = New System.Drawing.Point(3, 3)
         Me.gbSettings1.Name = "gbSettings1"
-        Me.gbSettings1.Padding = New System.Windows.Forms.Padding(4)
-        Me.gbSettings1.Size = New System.Drawing.Size(402, 264)
+        Me.gbSettings1.Size = New System.Drawing.Size(300, 213)
         Me.gbSettings1.TabIndex = 0
         Me.gbSettings1.TabStop = False
         Me.gbSettings1.Text = "Settings"
         '
         'btnShowFolder
         '
-        Me.btnShowFolder.Location = New System.Drawing.Point(284, 85)
-        Me.btnShowFolder.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnShowFolder.Location = New System.Drawing.Point(213, 69)
         Me.btnShowFolder.Name = "btnShowFolder"
-        Me.btnShowFolder.Size = New System.Drawing.Size(100, 28)
+        Me.btnShowFolder.Size = New System.Drawing.Size(75, 23)
         Me.btnShowFolder.TabIndex = 13
         Me.btnShowFolder.Text = "Show Folder"
         Me.btnShowFolder.UseVisualStyleBackColor = True
@@ -562,10 +548,9 @@ Partial Class Form1
         Me.CheckBox1.Checked = Global.Clipboard_Test_Prj.My.MySettings.Default.enableAlertSound
         Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox1.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Clipboard_Test_Prj.My.MySettings.Default, "enableAlertSound", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.CheckBox1.Location = New System.Drawing.Point(193, 92)
-        Me.CheckBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.CheckBox1.Location = New System.Drawing.Point(145, 75)
         Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(82, 21)
+        Me.CheckBox1.Size = New System.Drawing.Size(65, 17)
         Me.CheckBox1.TabIndex = 9
         Me.CheckBox1.Text = "Enabled"
         Me.CheckBox1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
@@ -574,87 +559,78 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(8, 92)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Location = New System.Drawing.Point(6, 75)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(166, 17)
+        Me.Label5.Size = New System.Drawing.Size(125, 13)
         Me.Label5.TabIndex = 8
         Me.Label5.Text = "Enable Copy Alert Sound"
         '
         'TextBox4
         '
         Me.TextBox4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Clipboard_Test_Prj.My.MySettings.Default, "copyAlertSoundFile", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.TextBox4.Location = New System.Drawing.Point(99, 119)
-        Me.TextBox4.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox4.Location = New System.Drawing.Point(74, 97)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(196, 22)
+        Me.TextBox4.Size = New System.Drawing.Size(148, 20)
         Me.TextBox4.TabIndex = 7
         Me.TextBox4.Text = Global.Clipboard_Test_Prj.My.MySettings.Default.copyAlertSoundFile
         '
         'TextBox3
         '
         Me.TextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Clipboard_Test_Prj.My.MySettings.Default, "soundFolder", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.TextBox3.Location = New System.Drawing.Point(116, 151)
-        Me.TextBox3.Margin = New System.Windows.Forms.Padding(4)
+        Me.TextBox3.Location = New System.Drawing.Point(87, 123)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(223, 22)
+        Me.TextBox3.Size = New System.Drawing.Size(168, 20)
         Me.TextBox3.TabIndex = 6
         Me.TextBox3.Text = Global.Clipboard_Test_Prj.My.MySettings.Default.soundFolder
         '
         'tbxMaxTotalBufferSize
         '
-        Me.tbxMaxTotalBufferSize.Location = New System.Drawing.Point(193, 55)
-        Me.tbxMaxTotalBufferSize.Margin = New System.Windows.Forms.Padding(4)
+        Me.tbxMaxTotalBufferSize.Location = New System.Drawing.Point(145, 45)
         Me.tbxMaxTotalBufferSize.Name = "tbxMaxTotalBufferSize"
-        Me.tbxMaxTotalBufferSize.Size = New System.Drawing.Size(188, 22)
+        Me.tbxMaxTotalBufferSize.Size = New System.Drawing.Size(142, 20)
         Me.tbxMaxTotalBufferSize.TabIndex = 5
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(8, 155)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Location = New System.Drawing.Point(6, 126)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(100, 17)
+        Me.Label4.Size = New System.Drawing.Size(75, 13)
         Me.Label4.TabIndex = 4
         Me.Label4.Text = "Sounds Folder"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(8, 123)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Location = New System.Drawing.Point(6, 100)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(82, 17)
+        Me.Label3.Size = New System.Drawing.Size(62, 13)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Alert Sound"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(8, 59)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Location = New System.Drawing.Point(6, 48)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(188, 17)
+        Me.Label2.Size = New System.Drawing.Size(142, 13)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Max Total Buffer Size, bytes:"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(8, 27)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(6, 22)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(182, 17)
+        Me.Label1.Size = New System.Drawing.Size(138, 13)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Max Buffer Item Size, bytes:"
         '
         'tbxMaxItemSize
         '
-        Me.tbxMaxItemSize.Location = New System.Drawing.Point(193, 23)
-        Me.tbxMaxItemSize.Margin = New System.Windows.Forms.Padding(4)
+        Me.tbxMaxItemSize.Location = New System.Drawing.Point(145, 19)
         Me.tbxMaxItemSize.Name = "tbxMaxItemSize"
-        Me.tbxMaxItemSize.Size = New System.Drawing.Size(188, 22)
+        Me.tbxMaxItemSize.Size = New System.Drawing.Size(142, 20)
         Me.tbxMaxItemSize.TabIndex = 0
         '
         'fbdSoundFolder
@@ -669,15 +645,15 @@ Partial Class Form1
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 411)
+        Me.ClientSize = New System.Drawing.Size(318, 334)
         Me.Controls.Add(Me.gbHistory)
         Me.Controls.Add(Me.gbxClipboard)
         Me.Controls.Add(Me.ssMain)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.MinimumSize = New System.Drawing.Size(438, 446)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.MinimumSize = New System.Drawing.Size(332, 370)
         Me.Name = "Form1"
         Me.Text = "Clipboard++ 20220621"
         Me.cmsFavorites.ResumeLayout(False)
